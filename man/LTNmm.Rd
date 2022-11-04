@@ -4,16 +4,25 @@
 \alias{LTNmm}
 \title{MM algorithm based on the AD method for Left-truncated normal distribution}
 \usage{
-LTNmm(a, mu, si2, y)
+LTNmm(
+  y,
+  a,
+  mu = NULL,
+  sigma = NULL,
+  Maxiter = 2000,
+  convergence = 1e-06,
+  method = "ADMM",
+  ...
+)
 }
 \arguments{
+\item{y}{data}
+
 \item{a}{left border}
 
 \item{mu}{mean}
 
 \item{si2}{variance}
-
-\item{y}{data}
 }
 \value{
 data

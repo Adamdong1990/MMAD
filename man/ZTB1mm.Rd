@@ -4,14 +4,14 @@
 \alias{ZTB1mm}
 \title{MM algorithm based on the AD method for Zero-truncated binomial distribution(1)}
 \usage{
-ZTB1mm(m, th, y)
+ZTB1mm(y, m, th, Maxiter = 500, convergence = 1e-06, method = "ADMM", ...)
 }
 \arguments{
+\item{y}{}
+
 \item{m}{number of experiments}
 
 \item{th}{probability of success}
-
-\item{y}{}
 }
 \value{
 

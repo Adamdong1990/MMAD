@@ -17,13 +17,15 @@ LTN_sample <- function(a, mu, si2, n)
 }
 
 
-N=500; a = 5; n = 200; mu = 7; si2 = 4
+N=500; a = 5; n = 100; mu = 7; si2 = 4
 
 RES = matrix(0,N,5)
 for(i in 1:N)
 {
   y = LTN_sample(a, mu, si2, n)
-  result <- LTNmm(a, mu, si2, y)
+  mu = 1; si2 = 1
+  result <- LTNmm(y, 5, 1, 1)
+  summary.LTNmm(result)
   RES[i,] = c(result$k, result$ELL, result$alpha, result$mse)
 
 }

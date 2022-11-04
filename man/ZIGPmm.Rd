@@ -4,23 +4,36 @@
 \alias{ZIGPmm}
 \title{MM algorithm based on the AD method for Multivariate compound zero-inflated generalized Poisson distribution}
 \usage{
-ZIGPmm(phi, la, th, y)
+ZIGPmm(
+  y,
+  phi0,
+  phi,
+  la,
+  th,
+  Maxiter = 500,
+  convergence = 1e-06,
+  method = "ADMM",
+  ...
+)
 }
 \arguments{
+\item{y}{matrix data}
+
+\item{phi0}{probability}
+
 \item{phi}{probability}
 
 \item{la}{scale parameter}
 
 \item{th}{discrete parameter}
-
-\item{y}{matrix data}
 }
 \value{
-data
+
 }
 \description{
 MM algorithm based on the AD method for Multivariate compound zero-inflated generalized Poisson distribution
 }
 \examples{
-y = matrix(7,1,1); ZIGPmm(0.5,1,0.1,y)
+y = matrix(7,1,1);
+ZIGPmm(0.5,0.5,1,0.1,y)
 }

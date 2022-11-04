@@ -4,7 +4,7 @@
 \alias{IC2mm}
 \title{MM algorithm based on the AD method for Case II interval-censored data}
 \usage{
-IC2mm(L, R)
+IC2mm(L, R, Maxiter = 500, convergence = 1e-06, method = "ADMM", ...)
 }
 \arguments{
 \item{L}{Left interval boundary}

@@ -1,0 +1,26 @@
+{
+    "id": "94F0CAB5",
+    "path": "C:/mypkg/MMad/demo/ZIGP-demo.R",
+    "project_path": "demo/ZIGP-demo.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1667359579033.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "40,8",
+        "scrollLine": "34"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1667220754,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1667220754,
+    "read_only": false,
+    "read_only_alternatives": []
+}
