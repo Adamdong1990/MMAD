@@ -14,7 +14,7 @@ LTNFx(a, mu, si2)
 \item{si2}{variance}
 }
 \value{
-
+requires a value
 }
 \description{
 Title

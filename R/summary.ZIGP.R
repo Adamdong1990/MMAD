@@ -3,7 +3,7 @@ summary.ZIGP <- function(object, digits=4, ...){
   cat(paste0(deparse(object$call), sep = "\n", collapse = "\n" ))
   cat("\n")
   cat("Model: ")
-  cat("Multivariate Compound Zero-Inflated Generalized Poisson Distribution")
+  cat("Type I Multivariate Zero-Inflated Generalized Poisson Distribution")
   cat("\n\n")
   ZIGP_cnt <- unlist(object$print_n)
   cat("Count of data: ")
@@ -34,24 +34,19 @@ summary.ZIGP <- function(object, digits=4, ...){
   cat("\n\n")
 
   m = length(object$la)
-  phi0 <- c(round(object$phi0, digits), round(object$std_phi0, digits), round(object$phi0_t_val, digits))
-  phi <- c(round(object$phi, digits), round(object$std_phi, digits), round(object$phi_t_val, digits))
-  la <- c(round(object$la, digits), round(object$std_la, digits), round(object$la_t_val, digits))
-  th <- c(round(object$th, digits), round(object$std_th, digits), round(object$th_t_val, digits))
+  phi0 <- c(round(object$phi0, digits), round(object$std_phi0, digits), round(object$ci_phi0_lower, digits), round(object$ci_phi0_upper, digits))
+  la <- c(round(object$la, digits), round(object$std_la, digits), round(object$ci_la_lower, digits), round(object$ci_la_upper, digits))
+  th <- c(round(object$th, digits), round(object$std_th, digits), round(object$ci_th_lower, digits), round(object$ci_th_upper, digits))
 
-  phi <- matrix(phi, m, 3)
-  la <- matrix(la, m, 3)
-  th <- matrix(th, m, 3)
+  la <- matrix(la, m, 4)
+  th <- matrix(th, m, 4)
 
   # rename
-  phi_rowname <- c()
   la_rowname <- c()
   th_rowname <- c()
   i = 1
   while (i < m+1)
   {
-    p_rowname = paste("phi", i, sep = '_')
-    phi_rowname <- append(phi_rowname, p_rowname)
     l_rowname = paste("la", i, sep = '_')
     la_rowname <- append(la_rowname, l_rowname)
     t_rowname = paste("th", i, sep = '_')
@@ -60,11 +55,10 @@ summary.ZIGP <- function(object, digits=4, ...){
     i = i + 1
   }
 
-  rownames(phi) <- phi_rowname
   rownames(la) <- la_rowname
   rownames(th) <- th_rowname
-  coef_zigp <- rbind(phi0, phi, la, th)
-  colnames(coef_zigp) <- c("Estimate", "Std. Error", "t value")
+  coef_zigp <- rbind(phi0, la, th)
+  colnames(coef_zigp) <- c("Estimate", "Std. Error", "Lower 95%-level", "Upper 95%-level")
   cat("Coefficients:\n")
   print(coef_zigp)
   cat("\n")

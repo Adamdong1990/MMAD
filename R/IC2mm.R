@@ -3,7 +3,7 @@
 #' @param L Left interval boundary
 #' @param R Right interval boundary
 #'
-#' @return
+#' @return requires a value
 #' @export
 #'
 #' @examples

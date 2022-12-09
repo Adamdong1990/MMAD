@@ -2,12 +2,11 @@
 % Please edit documentation in R/ZIGPmm.R
 \name{ZIGPmm}
 \alias{ZIGPmm}
-\title{MM algorithm based on the AD method for Multivariate compound zero-inflated generalized Poisson distribution}
+\title{Title}
 \usage{
 ZIGPmm(
   y,
   phi0,
-  phi,
   la,
   th,
   Maxiter = 500,
@@ -21,19 +20,25 @@ ZIGPmm(
 
 \item{phi0}{probability}
 
-\item{phi}{probability}
-
 \item{la}{scale parameter}
 
 \item{th}{discrete parameter}
+
+\item{Maxiter}{The maximum number of iterations}
+
+\item{convergence}{Convergence value}
+
+\item{method}{optimized method}
+
+\item{...}{}
 }
 \value{
-
+requires a value
 }
 \description{
-MM algorithm based on the AD method for Multivariate compound zero-inflated generalized Poisson distribution
+Title
 }
 \examples{
 y = matrix(7,1,1);
-ZIGPmm(0.5,0.5,1,0.1,y)
+ZIGPmm(y,0.5,1,0.1)
 }

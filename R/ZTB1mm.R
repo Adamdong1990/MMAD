@@ -2,9 +2,9 @@
 #'
 #' @param m number of experiments
 #' @param th probability of success
-#' @param y
+#' @param y requires a value
 #'
-#' @return
+#' @return requires a value
 #' @export
 #'
 #' @examples

@@ -7,14 +7,14 @@
 ZTB1mm(y, m, th, Maxiter = 500, convergence = 1e-06, method = "ADMM", ...)
 }
 \arguments{
-\item{y}{}
+\item{y}{requires a value}
 
 \item{m}{number of experiments}
 
 \item{th}{probability of success}
 }
 \value{
-
+requires a value
 }
 \description{
 MM algorithm based on the AD method for Zero-truncated binomial distribution(1)

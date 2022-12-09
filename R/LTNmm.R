@@ -45,11 +45,9 @@ LTNmm <- function(y, a, mu = NULL, sigma = NULL, Maxiter = 2000, convergence = 1
   result <- list()
 
   # log-likelihood function
-  log_ell <- -n*log(sigma)/2-sum((y-mu)^2)/(2*sigma)-n*log(1-pnorm((a-mu)/si))
+  log_ell <- -n*log(sigma)/2-sum((y-mu)^2)/(2*sigma)-n*log(1-pnorm((a-mu)/si)) - n*log(2*pi)/2
   el = c(log_ell)
 
-  mu_std <- c(mu)
-  sigma_std <- c(sigma)
   for (k in 1:Maxiter)
   {
     if (error > convergence)
@@ -65,11 +63,9 @@ LTNmm <- function(y, a, mu = NULL, sigma = NULL, Maxiter = 2000, convergence = 1
       deta = sigma + (mu1-mu)^2 - sigma*(a+mu-2*mu1)*g
       mu = mu1
       sigma = ( sum((y-mu)^2)/n + s1*deta )/(1+s1)
-      mu_std <- append(mu_std, mu)
-      sigma_std <- append(sigma_std, sigma)
 
       si = sqrt(sigma)
-      log_el <- -n*log(sigma)/2-sum((y-mu)^2)/(2*sigma)-n*log(1-pnorm((a-mu)/si))
+      log_el <- -n*log(sigma)/2-sum((y-mu)^2)/(2*sigma)-n*log(1-pnorm((a-mu)/si)) - n*log(2*pi)/2
       el <- append(el, log_el)
       error = abs(el[k+1]-el[k])/(abs(el[k])+1)
 
@@ -79,10 +75,16 @@ LTNmm <- function(y, a, mu = NULL, sigma = NULL, Maxiter = 2000, convergence = 1
     }
   }
 
-  std_mu <- sd(mu_std)/sqrt(length(mu_std))
-  std_sigma <- sd(sigma_std)/sqrt(length(sigma_std))
-  mu_t_val <- mu/std_mu
-  sigma_t_val <- sigma/std_sigma
+  Fisher_Matrix <- -n*LTNFx(a, mu, sigma)
+  std_err <- sqrt(diag(solve(Fisher_Matrix)))
+  std_mu <- std_err[1]
+  std_sigma <- std_err[2]
+
+  # confidence intervals
+  ci_mu_lower <- mu - 1.96*std_mu
+  ci_mu_upper <- mu + 1.96*std_mu
+  ci_sigma_lower <- sigma - 1.96*std_sigma
+  ci_sigma_upper <- sigma + 1.96*std_sigma
 
   ELL = el[length(el)]
   alpha = c(mu,sigma)
@@ -100,10 +102,12 @@ LTNmm <- function(y, a, mu = NULL, sigma = NULL, Maxiter = 2000, convergence = 1
   result$ELL <- ELL
   result$mu <- mu
   result$std_mu <- std_mu
-  result$mu_t_val <- mu_t_val
+  result$ci_mu_lower <- ci_mu_lower
+  result$ci_mu_upper <- ci_mu_upper
   result$sigma <- sigma
   result$std_sigma <- std_sigma
-  result$sigma_t_val <- sigma_t_val
+  result$ci_sigma_lower <- ci_sigma_lower
+  result$ci_sigma_upper <- ci_sigma_upper
   result$Rate <- Rate
   result$info_criteria <- info_criteria
   result$convergence <- convergence

@@ -33,10 +33,10 @@ summary.LTN <- function(object, digits=4, ...){
   cat(print_rate)
   cat("\n\n")
 
-  mu <- c(round(object$mu, digits), round(object$std_mu, digits), round(object$mu_t_val, digits))
-  sigma <- c(round(object$sigma, digits), round(object$std_sigma, digits), round(object$sigma_t_val, digits))
+  mu <- c(round(object$mu, digits), round(object$std_mu, digits), round(object$ci_mu_lower, digits), round(object$ci_mu_upper, digits))
+  sigma <- c(round(object$sigma, digits), round(object$std_sigma, digits), round(object$ci_sigma_lower, digits), round(object$ci_sigma_upper, digits))
   coef_ltn <- rbind(mu, sigma)
-  colnames(coef_ltn) <- c("Estimate", "Std. Error", "t value")
+  colnames(coef_ltn) <- c("Estimate", "Std. Error", "Lower 95%-level", "Upper 95%-level")
   cat("Coefficients:\n")
   print(coef_ltn)
   cat("\n")

@@ -4,7 +4,7 @@
 #' @param mu mean
 #' @param sig2 variance
 #'
-#' @return
+#' @return requires a value
 #' @export
 #'
 #' @examples

@@ -4,23 +4,21 @@
 \alias{ZIGPQx}
 \title{Title}
 \usage{
-ZIGPQx(phi0, phi, la, th)
+ZIGPQx(phi0, la, th)
 }
 \arguments{
 \item{phi0}{probability}
-
-\item{phi}{probability}
 
 \item{la}{scale parameter}
 
 \item{th}{discrete parameter}
 }
 \value{
-
+requires a value
 }
 \description{
 Title
 }
 \examples{
-ZIGPQx(0.5,0.5,1,0.1)
+ZIGPQx(0.5,1,0.1)
 }

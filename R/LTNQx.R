@@ -4,7 +4,7 @@
 #' @param mu mean
 #' @param si2 variance
 #'
-#' @return
+#' @return requires a value
 #' @export
 #'
 #' @examples
@@ -13,7 +13,6 @@
 LTNQx = function(a, mu, si2)
 {
   a1 = (a-mu)/(sqrt(si2))
-  dphi = -a1*exp(-0.5*a1^2)/sqrt(2*pi)
   c = 1-pnorm(a1)
   s1 = (1-c)/c
   tao = exp(-(a-mu)^2/(2*si2))/sqrt(2*pi*si2)

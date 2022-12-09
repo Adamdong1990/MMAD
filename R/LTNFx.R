@@ -4,7 +4,7 @@
 #' @param mu mean
 #' @param si2 variance
 #'
-#' @return
+#' @return requires a value
 #' @export
 #'
 #' @examples
@@ -13,7 +13,7 @@
 LTNFx = function(a,mu,si2)
 {
   a1 = (a-mu)/(sqrt(si2))
-  dphi = -a1*exp(-0.5*a1^2)/sqrt(2*pi)
+  dphi = -a1*exp(-0.5*a1^2)/sqrt(2*3.14159265)
   c = 1-pnorm(a1)
   df = matrix(0,2,2)
   df[1,1] = -1/si2 + dphi/(c*si2) + (dnorm(a1))^2/(si2*c^2)

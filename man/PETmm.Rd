@@ -18,7 +18,7 @@ PETmm(theta, y, A, s, r)
 \item{r}{the mean number of background counts of detector}
 }
 \value{
-
+requires a value
 }
 \description{
 Poisson model for transmission tomography

@@ -14,7 +14,7 @@ LTN_CRate(a, mu, sig2)
 \item{sig2}{variance}
 }
 \value{
-
+requires a value
 }
 \description{
 Title

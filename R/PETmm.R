@@ -6,7 +6,7 @@
 #' @param s the blank scan counts
 #' @param r the mean number of background counts of detector
 #'
-#' @return
+#' @return requires a value
 #' @export
 #'
 #' @examples

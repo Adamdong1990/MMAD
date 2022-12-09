@@ -12,7 +12,7 @@ IC2mm(L, R, Maxiter = 500, convergence = 1e-06, method = "ADMM", ...)
 \item{R}{Right interval boundary}
 }
 \value{
-
+requires a value
 }
 \description{
 MM algorithm based on the AD method for Case II interval-censored data
