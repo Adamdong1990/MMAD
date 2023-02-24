@@ -4,11 +4,19 @@
 \alias{PETmm}
 \title{Poisson model for transmission tomography}
 \usage{
-PETmm(theta, y, A, s, r)
+PETmm(
+  y,
+  A,
+  s,
+  r,
+  theta,
+  Maxiter = 1000,
+  convergence = 1e-06,
+  method = "ADMM",
+  ...
+)
 }
 \arguments{
-\item{theta}{attenuation coefficient}
-
 \item{y}{transmission measurement of detector}
 
 \item{A}{the n*q system matrix}
@@ -16,6 +24,8 @@ PETmm(theta, y, A, s, r)
 \item{s}{the blank scan counts}
 
 \item{r}{the mean number of background counts of detector}
+
+\item{theta}{attenuation coefficient}
 }
 \value{
 requires a value
@@ -27,5 +37,5 @@ Poisson model for transmission tomography
 y=c(4,1); theta=c(3,-4);s=c(3.7, 3.8); r=c(0,0)
 aa = c(0.029, 0.027, 0.007, 0.06)
 A=matrix(aa,2)
-PETmm(theta,y,A,s,r)
+PETmm(y, A, s, r, theta)
 }

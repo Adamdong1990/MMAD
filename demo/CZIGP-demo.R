@@ -38,7 +38,7 @@ ZIGP_sample <- function(phi0,phi,la,th,n)
 
 
   n = 400
-  m = 10
+  m = 3
   phi0 = 0.4
   phi = rep(0.2,m)
   la = rep(9,m)
@@ -54,26 +54,6 @@ ZIGP_sample <- function(phi0,phi,la,th,n)
 
   result <- CZIGPmm(y, phi0, phi, la, th)
   summary.CZIGP(result)
-
-############
-
-  Fisher_Matrix <- -n*CZIGPFx(phi0, phi, la, th)
-  std_err <- sqrt(diag(solve(Fisher_Matrix)))
-
-
-
-  n = nrow(y)
-  m = length(la)
-  zero = matrix(0,n,m)
-  yz = apply(1*(y==zero),1,prod)
-  n0 = sum(yz)
-  Iy = 1-yz
-
-  for(i in 1:m)
-  {
-  sum(Iy*(y[,2]!=0))
-  }
-
 
 
 

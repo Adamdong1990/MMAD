@@ -37,12 +37,11 @@ ZIGPmm <- function(y, phi0, la, th, Maxiter = 500, convergence = 1e-06, method =
   a = n0*log( phi0+(1-phi0)*exp(-sum(la))) + (n-n0)*log(1-phi0)
   b1 = sum(Iy*(y==0)*la)
   b2 = sum( Iy*(y!=0)*(log(la)+(y-1)*log(la+th*y)-la-th*y) )
-  # b3 = sum( factorial(y[y!=0]) )
-  log_ell = a + b1 + b2
+  b3 = sum( Iy*(y!=0)*log(factorial(y[y!=0])) )
+  log_ell = a + b1 + b2 - b3
   el = c(log_ell)
 
   error = 3
-  alpha0 = c(phi0,la,th)
   result <- list()
 
   for (k in 1:Maxiter)
@@ -64,7 +63,8 @@ ZIGPmm <- function(y, phi0, la, th, Maxiter = 500, convergence = 1e-06, method =
       a = n0*log( phi0+(1-phi0)*exp(-sum(la))) + (n-n0)*log(1-phi0)
       b1 = sum(Iy*(y==0)*la)
       b2 = sum( Iy*(y!=0)*(log(la)+(y-1)*log(la+th*y)-la-th*y) )
-      log_el = a + b1 + b2
+      b3 = sum( Iy*(y!=0)*log(factorial(y[y!=0])) )
+      log_el = a + b1 + b2 - b3
       el <- append(el, log_el)
       error=abs(el[k+1]-el[k])/(1+abs(el[k]))
 

@@ -1,6 +1,5 @@
-rm(list=ls())
-setwd("C:/code")
 
+rm(list=ls())
 
 
 LG_sample = function(n,theta)
@@ -20,26 +19,16 @@ LG_sample = function(n,theta)
   return(list(y=y,A=A,s=s,r=r))
 }
 
+n = 500
+theta1=rep(0.5,3)
+theta2=rep(0.8,3)
+theta3=rep(0.2,3)
+theta = c(theta1,theta2,theta3)
+p = length(theta)
+yy = LG_sample(n,theta)
 
-N = 500
-RES = matrix(0,N,33)
-for(i in 1:N)
-{
-  n = 500
-  theta1=rep(0.5,10)
-  theta2=rep(0.8,10)
-  theta3=rep(0.2,10)
-  theta = c(theta1,theta2,theta3)
-  p = length(theta)
-  yy = LG_sample(n,theta)
+y = yy$y; A = yy$A; s = yy$s; r = yy$r
+theta = rep(0.1,p)
 
-  y = yy$y; A = yy$A; s = yy$s; r = yy$r
-  theta = rep(0.1,p)
-
-  result <- PETmm(theta,y,A,s,r)
-  RES[i,] = c(result$k, result$ELL, result$theta, result$mse)
-
-}
-
-MRES = apply(RES,2,mean)
-MRES
+result <- PETmm(y, A, s, r, theta)
+summary.PET(result)

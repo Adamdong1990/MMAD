@@ -51,11 +51,4 @@ th = rep(0.1,m)
 
 result <- ZIGPmm(y, phi0, la, th)
 
-Fisher_Matrix <- -n*ZIGPFx(phi0, la, th)
-solve(Fisher_Matrix)
-diag(solve(Fisher_Matrix))
-
-std_err <- sqrt(diag(solve(Fisher_Matrix)))
-
-
 summary.ZIGP(result)

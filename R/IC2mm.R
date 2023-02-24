@@ -33,7 +33,6 @@ IC2mm <- function(L, R, Maxiter = 500, convergence = 1e-06, method = "ADMM", ...
   el = c(log_ell)
 
   error = 3
-  p_std <- c(p)
   for (k in 1:Maxiter)
   {
     if (error > convergence)
@@ -42,7 +41,6 @@ IC2mm <- function(L, R, Maxiter = 500, convergence = 1e-06, method = "ADMM", ...
       AA = t( matrix(rep(A,each=m),m,n) )
       B = colSums(alpha*pp/AA)
       p = B/sum(B)
-      p_std <- rbind(p_std, p)
 
       pp = matrix(rep(p,each=n),n,m)
       log_el <- sum( log( rowSums(alpha*pp) ) )
@@ -53,27 +51,14 @@ IC2mm <- function(L, R, Maxiter = 500, convergence = 1e-06, method = "ADMM", ...
       print_k <- k
     }
   }
-  std_p <- apply(p_std, 2, sd)/sqrt(length(p_std)/m)
-  p_t_val <- p/std_p
 
   ELL = el[length(el)]
-  # Rate =
 
   S = rep(0,m)
   for(i in 1:m)
   {
     S[i] = 1-sum((s<=s[i])*p)
   }
-
-  MAE =  max(abs(S-exp(-0.5*s)))
-  t1 = c(0,s[1:(m-1)])
-  t = s-t1
-  MSE = sum( (S-exp(-0.5*s))^2*t )
-
-  #add values of AIC and BIC
-  aic <- (2 * length(p)) - (2 * ELL)
-  bic <- log(length(L)) * length(p) - 2 * ELL
-  info_criteria <- c(AIC=aic, BIC=bic)
 
   result <- list()
   result$call <- match.call()
@@ -82,12 +67,8 @@ IC2mm <- function(L, R, Maxiter = 500, convergence = 1e-06, method = "ADMM", ...
   result$print_err <- print_err
   result$ELL <- ELL
   result$p <- p
-  result$std_p <- std_p
-  result$p_t_val <- p_t_val
-  # result$Rate <- Rate
-  result$MAE <- MAE
-  result$MSE <- MSE
-  result$info_criteria <- info_criteria
+  result$s <- s
+  result$S <- S
   result$convergence <- convergence
 
   return(result)

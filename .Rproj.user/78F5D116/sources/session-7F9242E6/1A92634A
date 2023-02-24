@@ -1,0 +1,26 @@
+{
+    "id": "1A92634A",
+    "path": "C:/mypkg/MMad/R/Non_Profile.R",
+    "project_path": "R/Non_Profile.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1672544656851.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "32,24",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1672544771,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1672544771373,
+    "read_only": false,
+    "read_only_alternatives": []
+}

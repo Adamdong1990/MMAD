@@ -1,0 +1,41 @@
+std.est <- function(data, time, status, be, Maxiter, convergence, bootstrap, b, method )
+{
+  coef <- NULL
+  pb <- txtProgressBar(min = 1, max = b, style = 3)
+  print("Bootstrapping...")
+  for (i in 1:b) {
+    boot_rows <- sample(nrow(data), nrow(data), replace = TRUE)
+    boot_data <- data[boot_rows, ]
+    time_data <- time[boot_rows, ]
+    status_data <- status[boot_rows, ]
+
+    capture.output(cox <- coxmm(
+      data=boot_data, time=time_data, status=status_data, be=be, Maxiter = Maxiter,
+      convergence = convergence, bootstrap = FALSE, b = b, method = method))
+
+    coef <- rbind(coef, cox$be)
+    setTxtProgressBar(pb, i)
+  }
+
+  se.boot <- apply(coef, 2, function(x) {
+    sqrt( sum((x - mean(x))^2)/(b-1) )
+  })
+
+  # bootstrap replications are non-normally distributed
+  ci <- apply(coef, 2, function(x) {
+    x <- sort(x)
+    ci.lower <- ifelse(round(length(x) * .025) < 1, x[1], x[round(length(x) * .025)])
+    ci.upper <- ifelse(round(length(x) * .975) > length(x), x[length(x)],
+                       x[round(length(x) * .975)]
+    )
+    return(list(ci.low = ci.lower, ci.up = ci.upper))
+  })
+
+  ci.final <- NULL
+  for (i in 1:length(ci)) {
+    ci.final <- rbind(ci.final, c(ci[[i]]$ci.low, ci[[i]]$ci.up))
+  }
+
+  est <- list(se = se.boot, ci = ci.final)
+  return(est)
+}
