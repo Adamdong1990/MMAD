@@ -31,7 +31,7 @@ result = CoxMM(Surv(time, status)~X1+X2+X3, data, be, convergence=1e-6, b=100)
 summary.cox(result)
 
 beta=c(0,0.5)
-result = CoxMM(Surv(time, status) ~ age + sex, lung,beta, Maxiter=2000, convergence=1e-6, b=10)
+result = CoxMM(Surv(time, status) ~ age + sex, lung, b=10)
 summary.cox(result)
 reee = coxph(Surv(time, status)~age + sex, lung)
 coef(reee)

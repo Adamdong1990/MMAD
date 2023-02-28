@@ -49,8 +49,8 @@ HessianF <- function(N, q, x, d, vd, a, b, lambda, theta, beta, vy)
       L_0ra_p =  ( cumsum( l_0ra_p[order(vy)] ) )[rank(vy)]
 
       df[j+1,p+1] = df[p+1,j+1] = sum( (1+theta*rowSums(d))*rowSums( ber*(x[,,p]*x[,,j]*La + x[,,p]*L_0a_j + x[,,j]*L_0r_p + L_0ra_p) )/(1+theta*mc)
-                                       - theta*(1+theta*rowSums(d))*rowSums( ber*(x[,,p]*La + L_0r_p))/(1+theta*mc) * rowSums( ber*(x[,,j]*La + L_0a_j))/(1+theta*mc) ) +
-        sum(((l_0r_p*l_0a_j - l_0ra_p*lambda)/lambda^2)[which(d>0)])
+                                  - theta*(1+theta*rowSums(d))*rowSums( ber*(x[,,p]*La + L_0r_p))/(1+theta*mc) * rowSums( ber*(x[,,j]*La + L_0a_j))/(1+theta*mc) ) +
+                                  sum(((l_0r_p*l_0a_j - l_0ra_p*lambda)/lambda^2)[which(d>0)])
 
     }
 

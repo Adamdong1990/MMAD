@@ -20,7 +20,7 @@
 #' u=runif(10); time=-log(u)/(la*exp(x%*%be))
 #' cen=3.7; status=1*(t<=cen)
 #' CoxMM(data, time, status, be)
-CoxMM <- function(formula, data, beta=NULL, Maxiter = 5000, convergence = 1e-06, bootstrap = TRUE, b = 100, ...)
+CoxMM <- function(formula, data, beta=NULL, Maxiter = 500, convergence = 1e-06, bootstrap = TRUE, b = 100, ...)
 {
   if (missing(formula) || class(formula) != "formula")
   { stop("'formula' is missing or incorrect") }
@@ -31,6 +31,15 @@ CoxMM <- function(formula, data, beta=NULL, Maxiter = 5000, convergence = 1e-06,
   mf <- model.frame(formula, data)
   mx <- model.matrix(formula, data)
 
+  status_id <- grep("status", names(mf))
+  if(length(status_id) != 1)
+  { stop("misspecified or non-specified status") }
+
+  time_id <- grep("time", names(mf))
+  if(length(time_id) != 1)
+  { stop("misspecified or non-specified time") }
+
+  o.formula <- formula
   o.data <- data
   o.beta <- beta
   se <- ci <- NULL
@@ -45,10 +54,7 @@ CoxMM <- function(formula, data, beta=NULL, Maxiter = 5000, convergence = 1e-06,
   x = matrix(X, n, q)
   event = sum(status)
   if (is.null(beta) == TRUE)
-  {
-    ch = coxph(formula, data)
-    beta_init <- c( unname(coef(ch)) )
-    be = matrix(beta_init, ncol=1)
+  { be = matrix(rep(0, q), ncol=1)
   } else {
     be = matrix(beta, ncol=1)
   }
@@ -60,14 +66,14 @@ CoxMM <- function(formula, data, beta=NULL, Maxiter = 5000, convergence = 1e-06,
   {
     if (eps > convergence)
     {
-      re=CoxProfile(x, status, time, be, la, n, q)
+      re=CoxProfile(x, status, time, be, la)
 
       be=re$newbe
       la=re$newla
+      LA=re$newLA
+      eps=re$eps
+      newlfun=re$newlfun
     }
-    LA=re$newLA
-    eps=re$eps
-    newlfun=re$newlfun
   }
   if (eps > convergence)
   { stop("Convergence result: Did not converge, try adjust 'Maxiter' or 'convergence'.") }

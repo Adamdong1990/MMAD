@@ -38,25 +38,24 @@ then let each \code{lambda} equals to \code{1/N} during calculation, which \code
 \item{...}{Additional arguments}
 }
 \value{
-An object of class \code{GaFrailtyMM} that contains the following fields:
-\item{N}{list of total observations}
-\item{TotalCen}{list of censored observations}
-\item{print_k}{The iterations}
-\item{print_err}{Convergence result}
-\item{ELL}{The Log Likelihood value}
-\item{th}{\eqn{\theta}}
-\item{std_th}{The standard deviation of the estimated \eqn{\theta}}
-\item{ci_th_lower, ci_th_upper}{The likelihood-based 95\% confidence interval for the \eqn{\theta}}
-\item{be}{\eqn{\beta}}
-\item{std_be}{The standard deviation of the estimated \eqn{\beta}}
-\item{ci_be_lower, ci_be_upper}{The likelihood-based 95\% confidence interval for the \eqn{\beta}}
-\item{convergence}{The final convergence value}
-\item{namesX}{The variable name}
+An object of class \code{GaFrailtyMM} that contains the following fields: Total amount of observations,
+total number of failure events, total number of iterations, Convergence result, The Log Likelihood value,
+variance of gamma distribution, The standard deviation of the estimated \eqn{\theta},
+The likelihood-based 95\% confidence interval for the \eqn{\theta}, vector of regression parameters,
+The standard deviation of the estimated \eqn{\beta}, The likelihood-based 95\% confidence interval for the \eqn{\beta},
+The variable name.
 }
 \description{
 The MM algorithm based on AD technology for gamma frailty model
 }
+\details{
+The \code{GaFrailtyMM} function is used to fit Gamma frailty survival model using profile MM algorithms
+based on AD technology. EM algorithms relies on the fact that, after profiling out the nonparametric component \eqn{\Lambda_0},
+the resulting function is concave. When it does not hold, using Newton method to maximize the resulting function is
+difficult especially when there exist a large number of covariates. The profile MM algorithms that can avoid the
+concavity requirement and bypass Newton method and matrix inversion.
+}
 \examples{
-gf = GaFrailtyMM(Surv(time, status) ~ age + sex + cluster(id), kidney)
-summary.GaFrailtyMM(gf)
+GaFrailtyMM(Surv(time, status) ~ age + sex + cluster(id), data=kidney)
+
 }

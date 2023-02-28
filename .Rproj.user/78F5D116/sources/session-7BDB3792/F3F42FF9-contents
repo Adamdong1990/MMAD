@@ -3,7 +3,7 @@ summary.cox <- function(object, digits=4, ...){
   cat(paste0(deparse(object$call), sep = "\n", collapse = "\n" ))
   cat("\n")
   cat("Model: ")
-  cat("Cox Model")
+  cat("Cox Model with Right-censored")
   cat("\n\n")
 
   cat(paste0("n= ", object$n, ", number of events=", object$event))

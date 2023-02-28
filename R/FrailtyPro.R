@@ -1,3 +1,36 @@
+#' Fitting Gamma frailty models with the profile MM algorithm
+#'
+#' @param N Total amount of observations.
+#' @param q The number of unknown regression parameters.
+#' @param x A vector of covariates.
+#' @param d Censored indicator: 0 or 1, default 0= censored.
+#' @param a The number of clusters.
+#' @param b The number of members in each cluster.
+#' @param lambda Baseline hazard rate.
+#' @param theta The Variance of frailty factors subject to Gamma distribution.
+#' @param beta A vector of unknown regression parameters.
+#' @param vy The survival time in vector form, e.g. \code{as.vector(time)}.
+#' @param vd The Censored indicator in vector form, e.g. \code{as.vector(status)}.
+#'
+#' @return The final estimate of theta, beta and lambda.
+#' @export
+#'
+#' @examples
+#' a=6; b=2; q=2; N=a*b
+#' x <- array(NA, c(a,b,q))
+#' x1 <- c(28,48,32,31,10,16, 28,48,32,32,10,17)
+#' x2 <- c(1,2,1,2,1,2 ,1,2,1,2,1,2)
+#' x[,,1] <- matrix(x1, 6, 2)
+#' x[,,2] <- matrix(x2, 6, 2)
+#' y1 <- c(8, 23, 22,447,30,24,16,13,28,318,12,245)
+#' d1 <- c(1,2,1,2,1,2 ,1,2,1,2,1,2)
+#' y <- matrix(y1, 6, 2)
+#' d <- matrix(d2, 6, 2)
+#' vy <- as.vector(y)
+#' vd <- as.vector(d)
+#' beta = rep(1, q); theta = 1; lambda = rep(1/N, N)
+#' FrailtyPro(N, q, x, d, a, b, lambda, theta, beta, vy, vd)
+#'
 FrailtyPro <- function(N, q, x, d, a, b, lambda, theta, beta, vy, vd)
 {
   La = ( cumsum( lambda[order(vy)] ) )[rank(vy)]

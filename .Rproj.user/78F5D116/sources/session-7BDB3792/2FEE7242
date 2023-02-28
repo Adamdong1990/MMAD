@@ -1,0 +1,26 @@
+{
+    "id": "2FEE7242",
+    "path": "C:/mypkg/MMad/R/CoxProfile.R",
+    "project_path": "R/CoxProfile.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1677545779375.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "17,0",
+        "scrollLine": "10"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1677545950,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1677545950853,
+    "read_only": false,
+    "read_only_alternatives": []
+}
