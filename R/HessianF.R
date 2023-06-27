@@ -1,15 +1,17 @@
+
 HessianF <- function(N, q, x, d, vd, a, b, lambda, theta, beta, vy)
 {
+  # HessianF is used to calculate the Hessian matrix of the Gamma Frailty model
+
   La = ( cumsum( lambda[order(vy)] ) )[rank(vy)]
   La = matrix(La,a,b)
   A = 1/theta +rowSums(d)
   BE = array(rep(beta,each=a*b),c(a,b,length(beta)))
   C = 1/theta+rowSums(La*exp(apply(x*BE,c(1,2),sum)))
   AC = matrix(A/C,a,b)
-  E_0 = AC*exp(apply(x*BE,c(1,2),sum))
+  E_0 = as.vector(AC*exp(apply(x*BE,c(1,2),sum)))
   SUM_0 = cumsum( (E_0[order(vy)])[seq(N,1,-1)] )
   SUM_0 = ( SUM_0[seq(N,1,-1)] )[rank(vy)]
-  lambda = vd/SUM_0
 
   df = matrix(0,q+1,q+1)
 

@@ -1,0 +1,39 @@
+
+LTNFx <- function(a,mu,si2)
+{
+  a1 = (a-mu)/(sqrt(si2))
+  dphi = -a1*exp(-0.5*a1^2)/sqrt(2*3.14159265)
+  c = 1-pnorm(a1)
+  df = matrix(0,2,2)
+  df[1,1] = -1/si2 + dphi/(c*si2) + (dnorm(a1))^2/(si2*c^2)
+  df[1,2] = df[2,1] =(a1*dphi -dnorm(a1))/(2*c*sqrt(si2^3)) + a1*(dnorm(a1))^2/(2*c^2*sqrt(si2^3))
+  df[2,2] = -1/(2*si2^2) + (a1^2*dphi-a1*dnorm(a1))/(4*c*si2^2)+a1^2*(dnorm(a1))^2/(4*c^2*si2^2)
+
+  return(df)
+}
+
+
+LTNQx <- function(a, mu, si2)
+{
+  a1 = (a-mu)/(sqrt(si2))
+  c = 1-pnorm(a1)
+  s1 = (1-c)/c
+  tao = exp(-(a-mu)^2/(2*si2))/sqrt(2*pi*si2)
+  g = tao/pnorm(a1)
+
+  dQ = matrix(0,2,2)
+  dQ[1,1] = -(1+s1)/si2
+  dQ[1,2] = dQ[2,1] = s1*g/si2 - dnorm(a1)/(c*sqrt(si2^3))
+  dQ[2,2] = -(1+s1)/(2*si2^2) + s1*(a-mu)*g/(si2^2) - a1*dnorm(a1)/(c*si2^2)
+
+  return(dQ)
+}
+
+LTN_CRate <- function(a, mu, sig2)
+{
+  DF = LTNFx(a,mu,si2)
+  DGI = solve(LTNQx(a,mu,si2))
+  A =  DGI%*%DF
+  rate = 1-min(eigen(A)$values)
+  return(rate)
+}

@@ -1,0 +1,512 @@
+for(j in 1:m)
+{
+for(i in 0:99)
+{   P[i+1,j] <- GP(i,la[j],th[j])     }
+a<-0:99
+X <- sample(a,n,P[,j],replace=TRUE)
+Z <- sample(c(0,1),n,c(phi[j],1-phi[j]),replace=TRUE)
+Y[,j]<- X*Z
+}
+z0 <- sample(c(0,1),n,c(phi0,1-phi0),replace=TRUE)
+zz <- matrix(z0,n,m)
+y <- zz*Y
+return(y)
+}
+n = 600
+m = 2
+phi0 = 0.1
+phi = c(0.2, 0.5)#rep(0.2,m)
+la = c(2, 7) #rep(2,m)
+th = c(0.2, 0.3) #rep(0.3,m)
+y = ZIGP_sample(phi0, phi,la,th,n)
+phi0 = 0.1
+phi = rep(0.1,m)
+la = rep(1,m)
+th = rep(0.1,m)
+result <- CZIGPMM(y, phi0, phi, la, th)
+summary(result)
+rm(list=ls())
+ZIGP_sample <- function(phi0,phi,la,th,n)
+{
+GP <- function(x, la0, th0)
+{
+b<-gamma(x+1)
+if(th0 <1 && th0>=0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+if(th0<0 && th0 >-1 &&  la0+th0*x <=0){
+p<-0 }
+if(th0<0 && th0>-1 && la0+th0*x > 0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+return(p)
+}
+m <- length(la)
+Y <- matrix(0,n,m)
+P <- matrix(0,100,m)
+for(j in 1:m)
+{
+for(i in 0:99)
+{   P[i+1,j] <- GP(i,la[j],th[j])     }
+a<-0:99
+X <- sample(a,n,P[,j],replace=TRUE)
+Z <- sample(c(0,1),n,c(phi[j],1-phi[j]),replace=TRUE)
+Y[,j]<- X*Z
+}
+z0 <- sample(c(0,1),n,c(phi0,1-phi0),replace=TRUE)
+zz <- matrix(z0,n,m)
+y <- zz*Y
+return(y)
+}
+n = 600
+m = 2
+phi0 = 0.1
+phi = c(0.2, 0.5)#rep(0.2,m)
+la = c(2, 7) #rep(2,m)
+th = c(0.2, 0.3) #rep(0.3,m)
+y = ZIGP_sample(phi0, phi,la,th,n)
+phi0 = 0.1
+phi = rep(0.1,m)
+la = rep(1,m)
+th = rep(0.1,m)
+result <- CZIGPMM(y, phi0, phi, la, th)
+summary(result)
+rm(list=ls())
+ZIGP_sample <- function(phi0,phi,la,th,n)
+{
+GP <- function(x, la0, th0)
+{
+b<-gamma(x+1)
+if(th0 <1 && th0>=0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+if(th0<0 && th0 >-1 &&  la0+th0*x <=0){
+p<-0 }
+if(th0<0 && th0>-1 && la0+th0*x > 0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+return(p)
+}
+m <- length(la)
+Y <- matrix(0,n,m)
+P <- matrix(0,100,m)
+for(j in 1:m)
+{
+for(i in 0:99)
+{   P[i+1,j] <- GP(i,la[j],th[j])     }
+a<-0:99
+X <- sample(a,n,P[,j],replace=TRUE)
+Z <- sample(c(0,1),n,c(phi[j],1-phi[j]),replace=TRUE)
+Y[,j]<- X*Z
+}
+z0 <- sample(c(0,1),n,c(phi0,1-phi0),replace=TRUE)
+zz <- matrix(z0,n,m)
+y <- zz*Y
+return(y)
+}
+n = 600
+m = 2
+phi0 = 0.1
+phi = c(0.2, 0.5)#rep(0.2,m)
+la = c(2, 7) #rep(2,m)
+th = c(0.2, 0.3) #rep(0.3,m)
+y = ZIGP_sample(phi0, phi,la,th,n)
+phi0 = 0.1
+phi = rep(0.1,m)
+la = rep(1,m)
+th = rep(0.1,m)
+result <- CZIGPMM(y, phi0, phi, la, th)
+summary(result)
+rm(list=ls())
+ZIGP_sample <- function(phi0,phi,la,th,n)
+{
+GP <- function(x, la0, th0)
+{
+b<-gamma(x+1)
+if(th0 <1 && th0>=0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+if(th0<0 && th0 >-1 &&  la0+th0*x <=0){
+p<-0 }
+if(th0<0 && th0>-1 && la0+th0*x > 0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+return(p)
+}
+m <- length(la)
+Y <- matrix(0,n,m)
+P <- matrix(0,100,m)
+for(j in 1:m)
+{
+for(i in 0:99)
+{   P[i+1,j] <- GP(i,la[j],th[j])     }
+a<-0:99
+X <- sample(a,n,P[,j],replace=TRUE)
+Z <- sample(c(0,1),n,c(phi[j],1-phi[j]),replace=TRUE)
+Y[,j]<- X*Z
+}
+z0 <- sample(c(0,1),n,c(phi0,1-phi0),replace=TRUE)
+zz <- matrix(z0,n,m)
+y <- zz*Y
+return(y)
+}
+n = 600
+m = 2
+phi0 = 0.1
+phi = c(0.2, 0.5)#rep(0.2,m)
+la = c(2, 7) #rep(2,m)
+th = c(0.2, 0.3) #rep(0.3,m)
+y = ZIGP_sample(phi0, phi,la,th,n)
+phi0 = 0.1
+phi = rep(0.1,m)
+la = rep(1,m)
+th = rep(0.1,m)
+result <- CZIGPMM(y, phi0, phi, la, th)
+summary(result)
+rm(list=ls())
+ZIGP_sample <- function(phi0,phi,la,th,n)
+{
+GP <- function(x, la0, th0)
+{
+b<-gamma(x+1)
+if(th0 <1 && th0>=0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+if(th0<0 && th0 >-1 &&  la0+th0*x <=0){
+p<-0 }
+if(th0<0 && th0>-1 && la0+th0*x > 0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+return(p)
+}
+m <- length(la)
+Y <- matrix(0,n,m)
+P <- matrix(0,100,m)
+for(j in 1:m)
+{
+for(i in 0:99)
+{   P[i+1,j] <- GP(i,la[j],th[j])     }
+a<-0:99
+X <- sample(a,n,P[,j],replace=TRUE)
+Z <- sample(c(0,1),n,c(phi[j],1-phi[j]),replace=TRUE)
+Y[,j]<- X*Z
+}
+z0 <- sample(c(0,1),n,c(phi0,1-phi0),replace=TRUE)
+zz <- matrix(z0,n,m)
+y <- zz*Y
+return(y)
+}
+n = 600
+m = 2
+phi0 = 0.1
+phi = c(0.2, 0.5)#rep(0.2,m)
+la = c(2, 7) #rep(2,m)
+th = c(0.2, 0.3) #rep(0.3,m)
+y = ZIGP_sample(phi0, phi,la,th,n)
+phi0 = 0.1
+phi = rep(0.1,m)
+la = rep(1,m)
+th = rep(0.1,m)
+result <- CZIGPMM(y, phi0, phi, la, th)
+summary(result)
+rm(list=ls())
+library(survival)
+head(lung)
+document()
+data = data(lung)
+result = CoxMM(Surv(time, status) ~ age + sex, lung)
+summary(result)
+plot(result)
+rm(list=ls())
+library(survival)
+result = GaFrailtyMM(Surv(time, status) ~ age + sex + cluster(id), data=kidney)
+summary.GaFrailtyMM(result)
+summary(result)
+plot(result)
+rm(list=ls())
+data(bcos)
+result = IC2MM(Surv(left, right, type = "interval2") ~ treatment, bcos)
+summary(result)
+result = IC2MM(Surv(left, right, type = "interval2") ~ treatment, bcos, IC2Control(Pdigits=3))
+summary(result)
+plot(result, COL=c("red", "blue"))
+document()
+result = GaFrailtyMM(Surv(time, status) ~ age + sex + cluster(id), data=kidney)
+summary(result)
+plot(result)
+result = CoxMM(Surv(time, status) ~ age + sex, lung)
+summary(result)
+plot.cox(result)
+plot(result)
+rm(list=ls())
+LTN_sample <- function(a, mu, si2, n)
+{
+x <- rep(0,n)
+for (i in 1:n)
+{
+repeat {
+z <- rnorm(1,mu,sqrt(si2))
+if(z >= a)
+{break} }
+x[i] <- z
+}
+return(x)
+}
+a = 5; n = 1000; mu = 7; si2 = 4
+y = LTN_sample(a, mu, si2, n)
+result <- LTNMM(y~1, a=5)
+summary(result)
+result <- LTNMM(formula = y~1, a=5)
+summary(result)
+rm(list=ls())
+ZIGP_sample <- function(phi0, la, th, n)
+{
+GP <- function(x, la0, th0)
+{
+b<-gamma(x+1)
+if(th0 <1 && th0>=0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+if(th0<0 && th0 >-1 &&  la0+th0*x <=0){
+p<-0 }
+if(th0<0 && th0>-1 && la0+th0*x > 0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+return(p)
+}
+m <- length(la)
+Y <- matrix(0,n,m)
+P <- matrix(0,100,m)
+for(j in 1:m)
+{
+for(i in 0:99)
+{   P[i+1,j] <- GP(i,la[j],th[j])     }
+a<-0:99
+X <- sample(a,n,P[,j],replace=TRUE)
+# Z <- sample(c(0,1),n,c(phi[j],1-phi[j]),replace=TRUE)
+Y[,j]<- X
+}
+z0 <- sample(c(0,1),n,c(phi0,1-phi0),replace=TRUE)
+zz <- matrix(z0,n,m)
+y <- zz*Y
+return(y)
+}
+n = 600
+m = 2
+phi0 = 0.4
+la = rep(9,m)
+th = rep(0.7,m)
+y = ZIGP_sample(phi0, la,th,n)
+phi0 = 0.1
+la = rep(1,m)
+th = rep(0.1,m)
+result <- ZIGPMM(data = y, phi0, la, th)
+summary(result)
+rm(list=ls())
+ZIGP_sample <- function(phi0,phi,la,th,n)
+{
+GP <- function(x, la0, th0)
+{
+b<-gamma(x+1)
+if(th0 <1 && th0>=0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+if(th0<0 && th0 >-1 &&  la0+th0*x <=0){
+p<-0 }
+if(th0<0 && th0>-1 && la0+th0*x > 0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+return(p)
+}
+m <- length(la)
+Y <- matrix(0,n,m)
+P <- matrix(0,100,m)
+for(j in 1:m)
+{
+for(i in 0:99)
+{   P[i+1,j] <- GP(i,la[j],th[j])     }
+a<-0:99
+X <- sample(a,n,P[,j],replace=TRUE)
+Z <- sample(c(0,1),n,c(phi[j],1-phi[j]),replace=TRUE)
+Y[,j]<- X*Z
+}
+z0 <- sample(c(0,1),n,c(phi0,1-phi0),replace=TRUE)
+zz <- matrix(z0,n,m)
+y <- zz*Y
+return(y)
+}
+n = 600
+m = 2
+phi0 = 0.1
+phi = c(0.2, 0.5)#rep(0.2,m)
+la = c(2, 7) #rep(2,m)
+th = c(0.2, 0.3) #rep(0.3,m)
+y = ZIGP_sample(phi0, phi,la,th,n)
+phi0 = 0.1
+phi = rep(0.1,m)
+la = rep(1,m)
+th = rep(0.1,m)
+result <- CZIGPMM(data = y, phi0, phi, la, th)
+summary(result)
+phi0 = 0.1
+phi = rep(0.1,m)
+la = rep(1,m)
+th = rep(0.1,m)
+result <- CZIGPMM(data = y, phi0, phi, la, th)
+summary(result)
+rm(list=ls())
+ZIGP_sample <- function(phi0,phi,la,th,n)
+{
+GP <- function(x, la0, th0)
+{
+b<-gamma(x+1)
+if(th0 <1 && th0>=0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+if(th0<0 && th0 >-1 &&  la0+th0*x <=0){
+p<-0 }
+if(th0<0 && th0>-1 && la0+th0*x > 0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+return(p)
+}
+m <- length(la)
+Y <- matrix(0,n,m)
+P <- matrix(0,100,m)
+for(j in 1:m)
+{
+for(i in 0:99)
+{   P[i+1,j] <- GP(i,la[j],th[j])     }
+a<-0:99
+X <- sample(a,n,P[,j],replace=TRUE)
+Z <- sample(c(0,1),n,c(phi[j],1-phi[j]),replace=TRUE)
+Y[,j]<- X*Z
+}
+z0 <- sample(c(0,1),n,c(phi0,1-phi0),replace=TRUE)
+zz <- matrix(z0,n,m)
+y <- zz*Y
+return(y)
+}
+n = 600
+m = 2
+phi0 = 0.1
+phi = c(0.2, 0.5)#rep(0.2,m)
+la = c(2, 7) #rep(2,m)
+th = c(0.2, 0.3) #rep(0.3,m)
+y = ZIGP_sample(phi0, phi,la,th,n)
+phi0 = 0.1
+phi = rep(0.1,m)
+la = rep(1,m)
+th = rep(0.1,m)
+result <- CZIGPMM(data = y, phi0, phi, la, th)
+summary(result)
+rm(list=ls())
+ZIGP_sample <- function(phi0,phi,la,th,n)
+{
+GP <- function(x, la0, th0)
+{
+b<-gamma(x+1)
+if(th0 <1 && th0>=0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+if(th0<0 && th0 >-1 &&  la0+th0*x <=0){
+p<-0 }
+if(th0<0 && th0>-1 && la0+th0*x > 0) {
+p<-exp(-la0-th0*x)*la0*(la0+th0*x)^(x-1)/b }
+return(p)
+}
+m <- length(la)
+Y <- matrix(0,n,m)
+P <- matrix(0,100,m)
+for(j in 1:m)
+{
+for(i in 0:99)
+{   P[i+1,j] <- GP(i,la[j],th[j])     }
+a<-0:99
+X <- sample(a,n,P[,j],replace=TRUE)
+Z <- sample(c(0,1),n,c(phi[j],1-phi[j]),replace=TRUE)
+Y[,j]<- X*Z
+}
+z0 <- sample(c(0,1),n,c(phi0,1-phi0),replace=TRUE)
+zz <- matrix(z0,n,m)
+y <- zz*Y
+return(y)
+}
+n = 600
+m = 2
+phi0 = 0.1
+phi = c(0.2, 0.5)#rep(0.2,m)
+la = c(2, 7) #rep(2,m)
+th = c(0.2, 0.3) #rep(0.3,m)
+y = ZIGP_sample(phi0, phi,la,th,n)
+phi0 = 0.1
+phi = rep(0.1,m)
+la = rep(1,m)
+th = rep(0.1,m)
+result <- CZIGPMM(data = y, phi0, phi, la, th)
+summary(result)
+library(devtools)
+load_all()
+document()
+document()
+docum
+docum
+document()
+document()
+library(devtools)
+load_all()
+document()
+file.rename("CZIGPmm.R", "R/CZIGPMM.R")
+file.rename("R/CZIGPmm.R", "R/CZIGPMM.R")
+file.rename("R/ZIGPmm.R", "R/ZIGPMM.R")
+file.rename("R/summary.cox.R", "R/summary.Cox.R")
+file.rename("R/plot.ic2.R", "R/plot.IC2.R")
+file.rename("R/plot.cox.R", "R/plot.Cox.R")
+file.rename("R/LTNmm.R", "R/LTNMM.R")
+document()
+document()
+document()
+document()
+library(devtools)
+load_all()
+document()
+document()
+document()
+document()
+CoxMM(Surv(time, status) ~ age + sex, data = lung)
+document()
+document()
+document()
+document()
+document()
+document()
+document()
+library(devtools)
+load_all()
+usethis::use_r("DataDesc.R")
+document()
+document()
+# 5.1 cadi
+y1 <- c( rep(0, 323), rep(1, 10), rep(1, 8), rep(2, 22), rep(2, 9), rep(3, 19), rep(3, 1), rep(3, 3), rep(3, 6), rep(4, 3), rep(4, 3), rep(4, 3), rep(5, 1), rep(6, 1), rep(6, 1), rep(7, 12), rep(7, 1), rep(7, 2), rep(7, 5), rep(10, 2), rep(14, 1), rep(15, 1)	)
+y2 <- c( rep(0, 323), rep(0, 10), rep(1, 8), rep(0, 22), rep(2, 9), rep(0, 19), rep(1, 1), rep(2, 3), rep(3, 6), rep(0, 3), rep(1, 3), rep(2, 3), rep(5, 1), rep(3, 1), rep(6, 1), rep(0, 12), rep(2, 1), rep(3, 2), rep(7, 5), rep(0, 2),  rep(7, 1),  rep(3, 1)	)
+data <- data.frame(x1 = y1, x2 = y2)
+colnames(data) <- c("y1", "y2")
+save(data, file = "cadi.rda")
+# 5.2 vijc
+y1 <- c( rep(0, 1227), rep(1, 150), rep(0, 319), rep(0, 109), rep(0, 27), rep(0, 20), rep(0, 5), rep(0, 1), rep(0, 2), rep(0, 1), rep(0, 2),  rep(1, 83), rep(1, 23), rep(1, 10), rep(1, 1), rep(1, 3), rep(1, 2), rep(1, 1), rep(1, 1), rep(2, 34),  rep(2, 16),  rep(2, 6),  rep(2, 6),  rep(2, 2),  rep(2, 2),  rep(2, 1),  rep(2, 1),  rep(2, 1),   rep(3, 20),  rep(3, 5),  rep(3, 1),  rep(3, 2),  rep(4, 8),  rep(4, 2),  rep(4, 2),  rep(4, 1),  rep(5, 6),   rep(5, 2),  rep(6, 2),  rep(6, 1),  rep(7, 2),  rep(8, 3),  rep(9, 3),  rep(10, 7),  rep(15, 1) )
+y2 <- c( rep(0, 1227), rep(0, 150), rep(1, 319), rep(2, 109), rep(3, 27), rep(4, 20), rep(5, 5), rep(6, 1), rep(7, 2), rep(8, 1), rep(10, 2), rep(1, 83), rep(2, 23), rep(3, 10), rep(4, 1), rep(5, 3), rep(6, 2), rep(7, 1), rep(9, 1), rep(0, 34),  rep(1, 16),  rep(2, 6),  rep(3, 6),  rep(4, 2),  rep(5, 2),  rep(6, 1),  rep(7, 1),  rep(12, 1),  rep(0, 20),  rep(1, 5),  rep(2, 1),  rep(4, 2),  rep(0, 8),  rep(1, 2),  rep(3, 2),  rep(10, 1),  rep(0, 6),  rep(1, 2),  rep(0, 2),  rep(9, 1),  rep(0, 2),  rep(0, 3),  rep(0, 3),  rep(0, 7),  rep(0, 1)	)
+data <- data.frame(x1 = y1, x2 = y2)
+colnames(data) <- c("y1", "y2")
+save(data, file = "vijc.rda")
+document()
+document()
+library(MMAD)
+ls("package:MMAD")
+load_all()
+# 5.2 vijc
+y1 <- c( rep(0, 1227), rep(1, 150), rep(0, 319), rep(0, 109), rep(0, 27), rep(0, 20), rep(0, 5), rep(0, 1), rep(0, 2), rep(0, 1), rep(0, 2),  rep(1, 83), rep(1, 23), rep(1, 10), rep(1, 1), rep(1, 3), rep(1, 2), rep(1, 1), rep(1, 1), rep(2, 34),  rep(2, 16),  rep(2, 6),  rep(2, 6),  rep(2, 2),  rep(2, 2),  rep(2, 1),  rep(2, 1),  rep(2, 1),   rep(3, 20),  rep(3, 5),  rep(3, 1),  rep(3, 2),  rep(4, 8),  rep(4, 2),  rep(4, 2),  rep(4, 1),  rep(5, 6),   rep(5, 2),  rep(6, 2),  rep(6, 1),  rep(7, 2),  rep(8, 3),  rep(9, 3),  rep(10, 7),  rep(15, 1) )
+y2 <- c( rep(0, 1227), rep(0, 150), rep(1, 319), rep(2, 109), rep(3, 27), rep(4, 20), rep(5, 5), rep(6, 1), rep(7, 2), rep(8, 1), rep(10, 2), rep(1, 83), rep(2, 23), rep(3, 10), rep(4, 1), rep(5, 3), rep(6, 2), rep(7, 1), rep(9, 1), rep(0, 34),  rep(1, 16),  rep(2, 6),  rep(3, 6),  rep(4, 2),  rep(5, 2),  rep(6, 1),  rep(7, 1),  rep(12, 1),  rep(0, 20),  rep(1, 5),  rep(2, 1),  rep(4, 2),  rep(0, 8),  rep(1, 2),  rep(3, 2),  rep(10, 1),  rep(0, 6),  rep(1, 2),  rep(0, 2),  rep(9, 1),  rep(0, 2),  rep(0, 3),  rep(0, 3),  rep(0, 7),  rep(0, 1)	)
+vijc <- data.frame(x1 = y1, x2 = y2)
+colnames(vijc) <- c("y1", "y2")
+save(vijc, file = "vijc.rda")
+# 5.1 cadi
+y1 <- c( rep(0, 323), rep(1, 10), rep(1, 8), rep(2, 22), rep(2, 9), rep(3, 19), rep(3, 1), rep(3, 3), rep(3, 6), rep(4, 3), rep(4, 3), rep(4, 3), rep(5, 1), rep(6, 1), rep(6, 1), rep(7, 12), rep(7, 1), rep(7, 2), rep(7, 5), rep(10, 2), rep(14, 1), rep(15, 1)	)
+y2 <- c( rep(0, 323), rep(0, 10), rep(1, 8), rep(0, 22), rep(2, 9), rep(0, 19), rep(1, 1), rep(2, 3), rep(3, 6), rep(0, 3), rep(1, 3), rep(2, 3), rep(5, 1), rep(3, 1), rep(6, 1), rep(0, 12), rep(2, 1), rep(3, 2), rep(7, 5), rep(0, 2),  rep(7, 1),  rep(3, 1)	)
+cadi <- data.frame(x1 = y1, x2 = y2)
+colnames(cadi) <- c("y1", "y2")
+save(cadi, file = "cadi.rda")
+document()
+document()
+library(MMAD)
+ls("package:MMAD")
+document()
+load_all()
+library(devtools)
+load_all()
+install.packages("stats")
+install.packages("grDevices")

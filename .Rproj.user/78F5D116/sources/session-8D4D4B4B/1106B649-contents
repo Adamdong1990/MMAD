@@ -1,0 +1,85 @@
+rm(list=ls())
+
+library(survival)
+library(frailtyHL)
+library(frailtyEM)
+
+beta = c(0.00522, -1.58326)
+theta = 0.408
+N=76
+lambda = rep(1/N, N)
+
+gf = GaFrailtyMM(Surv(time, status) ~ age + sex + cluster(id), data=kidney, Maxiter = 1000, beta, theta, lambda)
+summary.GaFrailtyMM(gf)
+result$time
+kidney$time
+
+result = GaFrailtyMM(Surv(time, status) ~ age + sex + cluster(id), data=kidney)
+summary.GaFrailtyMM(result)
+plot.cox(result)
+dim(result$time)[2]
+head(kidney)
+result$La
+plot(sort(result$time[,1]), sort(result$La[,1]),col="red",type="s")
+plot(sort(result$time[,2]), sort(result$La[,2]),col="blue",type="s")
+plot(sort(result$time), sort(result$La),col="blue",type="s")
+
+plot(t1,non.LA1,col="red",type="s")
+
+# gf$print_k
+
+# frailtyHL
+kidney_g02<-frailtyHL(Surv(time,status)~sex+age+(1|id),kidney,RandDist="Gamma",mord=0,dord=2)
+
+# coxph
+fitt=coxph(Surv(time, status) ~ age + sex + frailty.gamma(id, eps=1e-6, method="em", sparse=0),
+             outer.max=1000, iter.max=10000,
+             data=kidney)
+fit <- coxph(Surv(time, status) ~ age + ph.ecog + strata(inst), lung)
+
+ggsurvplot(survfit(fitt), data = kidney,
+           conf.int = FALSE, # 增加置信区间
+           fun = "cumhaz") # 绘制累计风险曲线
+
+plot(result)
+vfit <- coxph(Surv(time,status) ~ trt + factor(celltype) +
+                karno + age, data=veteran, x=TRUE)
+
+temp <- cox.zph(vfit)
+plot(temp, var=3) # Look at Karnofsy score, old way of doing plot
+plot(temp[3]) # New way with subscripting
+abline(0, 0, lty=3)
+# Add the linear fit as well
+abline(lm(temp$y[,3] ~ temp$x)$coefficients, lty=4, col=3)
+title(main="VA Lung Study")
+# frailtyEM
+re <- emfrail(formula = Surv(time, status) ~ sex + age + cluster(id),
+              data = kidney, distribution = emfrail_dist(dist = "gamma"))
+summary(re)
+
+newdata = data.frame(kidney$sex, kidney$age)
+autoplot(re, type = "pred", quantity = "survival",newdata=newdata)
+
+mod_rec <- emfrail(Surv(start, stop, status) ~ treatment + number + cluster(id), bladder1,
+control = emfrail_control(ca_test = FALSE, lik_ci = FALSE))
+
+newdata1 <- data.frame(treatment = c("placebo", "pyridoxine"),
+                       number = c(1, 3))
+plot(mod_rec, type = "hr", newdata = newdata1)
+
+
+getwd()
+
+file_a <- load("C:/mypkg/bcos.rda")
+usethis::use_data(bcos)
+
+file_b <- load("C:/mypkg/kidney.rda")
+usethis::use_data(kidney)
+
+save(kidney, file = "C:/mypkg/kidney.rda")
+
+
+
+result = GaFrailtyMM(Surv(time, status) ~ age + sex + cluster(id), data=kidney)
+summary(result)
+plot(result)

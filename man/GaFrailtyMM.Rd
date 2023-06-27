@@ -10,7 +10,7 @@ GaFrailtyMM(
   beta = NULL,
   theta = NULL,
   lambda = NULL,
-  Maxiter = 1000,
+  Maxiter = 2000,
   convergence = 1e-06,
   ...
 )
@@ -31,7 +31,7 @@ If is \code{NULL}, then let \code{theta=1} during calculation.}
 \item{lambda}{Baseline hazard rate, default set to \code{NULL}. If is \code{NULL},
 then let each \code{lambda} equals to \code{1/N} during calculation, which \code{N} is the number of observed.}
 
-\item{Maxiter}{The maximum number of iterations; default=1000.}
+\item{Maxiter}{The maximum number of iterations; default=2000.}
 
 \item{convergence}{Specify the convergence criterion, the default is 1e-6.}
 
@@ -39,23 +39,39 @@ then let each \code{lambda} equals to \code{1/N} during calculation, which \code
 }
 \value{
 An object of class \code{GaFrailtyMM} that contains the following fields: Total amount of observations,
-total number of failure events, total number of iterations, Convergence result, The Log Likelihood value,
-variance of gamma distribution, The standard deviation of the estimated \eqn{\theta},
-The likelihood-based 95\% confidence interval for the \eqn{\theta}, vector of regression parameters,
+The Time, the \eqn{\Lambda}, the \eqn{\lambda}, total number of failure events, total number of iterations, Convergence result, The Log Likelihood value,
+the \eqn{\theta}, The standard deviation of the estimated \eqn{\theta},
+The likelihood-based 95\% confidence interval for the \eqn{\theta}, \eqn{\beta},
 The standard deviation of the estimated \eqn{\beta}, The likelihood-based 95\% confidence interval for the \eqn{\beta},
 The variable name.
 }
 \description{
-The MM algorithm based on AD technology for gamma frailty model
+Let \eqn{T_{ij}, C_{ij}} and \eqn{X_{ij} = (X_{ij1},\cdots, X_{ijq})^T} denote the,
+survival time, the censoring time and a vector of covariates, respectively. for the \eqn{j}-th individual in the \eqn{i}-th cluster, for \eqn{j=1, \cdots, M_i } and  \eqn{i=1, \cdots, B}. And assume the censoring time
+\eqn{C_{ij}} is independent of the survival time \eqn{T_{ij}} are mutually independent, and \eqn{I_{ij} = I(T_{ij} \leqslant C_{ij})} is the censoring indicator.
+Conditional on a cluster-specific frailty  \eqn{\omega_i},  Then the frailty model postulates that the instantaneous hazard rate function of \eqn{T_{ij}} is
+
+\deqn{\lambda(t|X_{ij} , \omega_i )=\lambda_{0}(t) \exp(X_{ij}^{T} \beta) \omega_i}
+
+where \eqn{\lambda_{0}(t)} is a baseline hazard rate and \eqn{\beta} is a vector of regression parameters. We assume that the frailty \eqn{\omega} has a gamma distribution
+with mean 1, variance \eqn{\theta} and density
+
+\deqn{ g(\omega) = \frac{\omega^{\frac{1}{1-\theta}} \exp(-\frac{\omega}{\theta})}{\Gamma( \frac{1}{\theta}) \theta^{\frac{1}{\theta}}} }
+
+and we denote \eqn{\Lambda} is accumulative hazard rate. The \code{GaFrailtyMM} function is used to calculate the Gamma Frailty model.
 }
 \details{
-The \code{GaFrailtyMM} function is used to fit Gamma frailty survival model using profile MM algorithms
+The \code{GaFrailtyMM} function is used to calculate Gamma frailty survival model using profile MM algorithms
 based on AD technology. EM algorithms relies on the fact that, after profiling out the nonparametric component \eqn{\Lambda_0},
 the resulting function is concave. When it does not hold, using Newton method to maximize the resulting function is
 difficult especially when there exist a large number of covariates. The profile MM algorithms that can avoid the
 concavity requirement and bypass Newton method and matrix inversion.
 }
 \examples{
+library(survival)
 GaFrailtyMM(Surv(time, status) ~ age + sex + cluster(id), data=kidney)
 
+}
+\references{
+Huang X.F., Xu J.F. and Tian G.L.(2019). "On profile MM algorithms for gamma frailty survival models." \emph{Statistica Sinica} \strong{29}(2), 895-916.
 }

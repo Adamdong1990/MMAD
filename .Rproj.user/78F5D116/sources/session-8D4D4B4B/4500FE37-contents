@@ -1,0 +1,21 @@
+rm(list=ls())
+
+LTN_sample <- function(a, mu, si2, n)
+{
+  x <- rep(0,n)
+  for (i in 1:n)
+  {
+    repeat {
+      z <- rnorm(1,mu,sqrt(si2))
+      if(z >= a)
+      {break} }
+    x[i] <- z
+  }
+  return(x)
+}
+
+  a = 5; n = 1000; mu = 7; si2 = 4
+  y = LTN_sample(a, mu, si2, n)
+
+  result <- LTNMM(y~1, a=5)
+  summary(result)
