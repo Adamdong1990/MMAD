@@ -1,0 +1,169 @@
+rm(list=ls())
+
+sam=function(n,be,th,la){
+  q=length(be)
+  x=matrix(rnorm(n*q,-1,1),n,q)
+  u=runif(n)
+  t=-log(u)/(la*exp(x%*%be))
+  #t=(exp(-log(u)/exp(x%*%be))-1)/la
+  cen=3.7
+  I=1*(t<=cen)
+  t=pmin(t,cen)
+  return(list(x=x,I=I,t=t))
+}
+
+n=200;q=3
+be.true=matrix(c(-0.5,1,2),ncol=1)
+t.true=c(0.1,0.5)
+LA.TRUE=2*t.true
+
+be.in=be.true*0.5
+
+da=sam(n,be=be.true,la=2)
+data=da$x;time=da$t;status=da$I;be=be.in;bootstrap = TRUE
+
+
+
+X1=data[,1];X2=data[,2];X3=data[,3]
+data = data.frame(X1,X2,X3,time=time,status)
+
+library(survival)
+be = c(0,0,0)
+result = CoxMM(Surv(time, status)~X1+X2+X3, data, beat=be,b=10)
+summary.cox(result)
+plot.cox(result)
+
+
+data = data(lung)
+head(lung)
+library(survival)
+beta = c(0.1, 1)
+result = CoxMM(Surv(time, status) ~ age + sex, lung)
+summary(result)
+plot.cox(result)
+
+plot(result)
+
+
+result = CoxMM(Surv(time, status)~X1+X2+X3, data, b=10)
+ch <- coxph(Surv(time, status)~X1+X2+X3, data)
+
+c( unname(coef(ch)) )
+
+beta=c(0,0)
+result = CoxMM(Surv(time, status) ~ age + sex, lung,beta=beta, b=10)
+summary.cox(result)
+plot.cox(result)
+reee = coxph(Surv(time, status)~age + sex, lung)
+coef(reee)
+theta_init <- c(unname(coef(reee)))
+
+basehaz(reee)
+
+time <- sort(time)
+LA <- sort(result$LA)
+sort(result$la)
+
+range(LA[LA!=Inf])
+round(range(time[time!=Inf]))
+
+digits=4
+tab <- data.frame(TIME=round( sort(time),digits ), Lambda=round( sort(result$LA),digits) )
+print(tab)
+result = CoxMM(Surv(time, status)~X1+X2+X3, data, be, convergence=1e-6, b=100)
+summary.cox(result)
+
+
+t1=time[1:9];t2=time[10:n]
+non.LA1=result$LA[1:9]
+non.LA2=result$LA[10:n]
+
+t1=sort(time)
+non.LA1=sort(result$LA)
+
+plot(t1,non.LA1,pch=22,col="red",xlab="month",ylab="estimated baseline cumulative hazard rate",cex.lab=0.8,cex.axis=0.8)
+
+plot(t1,non.LA1,col="red",xlab="month",ylab="estimated baseline cumulative hazard rate")
+
+points(t1,non.LA1,lty=6,type="s",col="black")
+
+######
+beta = c(0.017045, -0.513219)
+result = CoxMM(Surv(time, status) ~ age + sex, lung, beta, Maxiter = 1000, convergence=1e-6, b=100)
+summary.cox(result)
+
+data = data(lung)
+head(lung)
+library(survival)
+beta = c(0.1, 1)
+result = CoxMM(Surv(time, status) ~ age + sex, lung)
+summary(result)
+plot.cox(result)
+
+LA <- sort(result$LA)
+time <- sort(result$time)
+digits=2
+round(time,2)
+data.frame(Time=round(time,digits), Lambda=round( LA,digits) )
+
+lung$time
+t1=sort(lung$time)
+non.LA1=sort(result$LA)
+
+plot(t1,non.LA1,pch=22,col="red",xlab="month",ylab="estimated baseline cumulative hazard rate",cex.lab=0.8,cex.axis=0.8)
+
+plot(t1,non.LA1,col="red",type="s")
+
+points(t1,non.LA1,lty=6,type="s",col="black")
+
+
+#
+beta=c(0,-0.5)
+res = CoxMM(Surv(time, status) ~ age + sex, lung)
+summary.cox(res)
+
+data = matrix(rnorm(10*1,-1,1),10,1)
+be = 0.5
+u=runif(10); time=-log(u)/(la*exp(x%*%be))
+cen=3.7; status=1*(t<=cen)
+CoxMM(data, time, status, be)
+
+plot.cox(result)
+
+
+
+plot.cox <-function(x, XLAB="Time", YLAB="Cumulative hazard rate", TYPE="s", LTY=1, LWD=1, COL=gray(0), digits=4, ...)
+{
+  LA <- sort(x$LA)
+  time <- sort(x$time)
+
+  tab <- data.frame(Time=round( sort(time),digits ), Lambda=round( sort(result$LA),digits) )
+  print(tab)
+
+  # Add a figure frame
+  # The meaning of type="n" is not to add any elements to the graph,
+  # but only to draw the coordinate axis
+  XLIM <- range(time[time!=Inf])
+  YLIM <- range(LA[LA!=Inf])
+  plot(XLIM, YLIM, type="n", xlab=XLAB, ylab=YLAB, ...)
+
+  do.call("lines", c(list(x=time,y=LA), type=TYPE, lty=LTY, lwd=LWD, col=COL,...))
+
+}
+install.packages("survminer")
+library(survminer)
+fit3 <- survfit(Surv(time,status)~age + sex, lung)
+
+ggsurvplot(fit3, data=lung, fun="cumhaz")
+
+
+vector(length=5)
+
+
+x = matrix(rnorm(10*1,-1,1),10,1)
+la = 2; beta = 0.5
+u=runif(10); y=-log(u)/(la*exp(x%*%beta))
+cen=3.7; d=1*(y<=cen)
+N = 10; q=1; lambda = rep(1/N, N)
+CoxProfile(x, d, y, beta, lambda, N, q)
+

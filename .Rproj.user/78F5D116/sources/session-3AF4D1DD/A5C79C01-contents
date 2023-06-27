@@ -1,0 +1,5 @@
+rm(list=ls())
+
+result = GaFrailtyMM(Surv(time, status) ~ age + sex + cluster(id), data=kidney)
+summary(result)
+plot(result)

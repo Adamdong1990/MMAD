@@ -1,0 +1,21 @@
+# index file for demo directory
+#
+# This file lists all the demos in this directory.
+#
+# Example using CoxMM
+Cox-demo.R
+#
+# Example using CZIGPMM
+CZIGP-demo.R
+#
+# Example using GaFrailtyMM
+GaF-demo.R
+#
+# Example using IC2MM
+IC2-demo.R
+#
+# Example using LTNMM
+LTN-demo.R
+#
+# Example using ZIGPMM
+ZIGP-demo.R

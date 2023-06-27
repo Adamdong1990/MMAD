@@ -1,0 +1,62 @@
+rm(list=ls())
+
+
+
+sample <- function(la,n)
+{
+  u = runif(n,0,1)
+  w = runif(n,0,1)
+  U = -log(u)/la
+  W = -log(w)/la
+  L = pmin(U,W)
+  R = pmax(U,W)
+  return(list(L=L,R=R))
+}
+
+
+  n = 10
+  y=sample(0.5,n)
+  L = y$L
+  R = y$R
+
+
+  y=read.csv("C:/code/123.csv")
+  L = y$L
+  R = y$R
+
+  head(y, 10)
+
+  #digits <- c(0, 4)
+
+
+  c(L,R,1)
+  data =data.frame(L,R)
+
+  round(R, 1)
+
+  result = IC2MM(Surv(L,R, type = "interval2") ~ 1, data, control=IC2Control(Pdigits=3))
+  summary.IC2(result)
+  plot.ic2(result)
+
+  library(survival)
+  data(bcos)
+  result = IC2MM(Surv(left, right, type = "interval2") ~ treatment, bcos, IC2Control(Pdigits=3))
+  summary(result)
+  plot(result, COL=c("red", "blue"))
+
+  IC2Control(Pdigits=3)
+
+
+  library("interval")
+  BiocManager::install('Icens')
+  fit1 <- icfit(Surv(L,R, type = "interval2") ~ 1,data)
+  summary(fit1)
+  screen(2)
+  plot(fit1)
+
+  split.screen(c(1,2))
+  close.screen(all.screens = T)
+
+
+  time<-c(0,as.vector(result$s))
+  XLIM<-range(time[time!=Inf])

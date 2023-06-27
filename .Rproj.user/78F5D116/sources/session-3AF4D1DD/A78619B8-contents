@@ -1,0 +1,33 @@
+
+sam=function(n,be,th,la){
+  q=length(be)
+  x=matrix(rnorm(n*q,-1,1),n,q)
+  u=runif(n)
+  t=-log(u)/(la*exp(x%*%be))
+  cen=3.7
+  I=1*(t<=cen)
+  t=pmin(t,cen)
+  return(list(x=x,I=I,t=t))
+}
+
+n=200;q=3
+be.true=matrix(c(-0.5,1,2),ncol=1)
+t.true=c(0.1,0.5)
+LA.TRUE=2*t.true
+
+be.in=be.true*0.5
+
+da=sam(n,be=be.true,la=2)
+data=da$x;time=da$t;status=da$I;be=be.in;bootstrap = TRUE
+X1=data[,1];X2=data[,2];X3=data[,3]
+data = data.frame(X1,X2,X3,time=time,status)
+
+
+result = CoxMM(Surv(time, status)~X1+X2+X3, data, beat=be)
+summary(result)
+plot(result)
+
+# 2
+result = CoxMM(Surv(time, status) ~ age + sex, lung)
+summary(result)
+plot(result)
