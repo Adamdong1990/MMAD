@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.Cox.R
 \name{summary.Cox}
 \alias{summary.Cox}
-\title{summary of parameter estimates of a Cox model}
+\title{Summary of parameter estimates of a Cox model}
 \usage{
 \method{summary}{Cox}(object, digits = 4, ...)
 }
@@ -14,18 +14,18 @@
 \item{...}{Additional arguments}
 }
 \value{
-Prints the fitting result of the \code{CoxMM} function.
+Summary for \code{CoxMM} objects.
 }
 \description{
-This function returns the fitting result of the \code{CoxMM} function
+This function returns the result of the \code{CoxMM} function
 }
 \examples{
 
 library(survival)
 result <- CoxMM(Surv(time, status) ~ age + sex, lung)
-\dontrun{
-summary.Cox(result,digits=4)
-}
+
+summary(result,digits=4)
+
 
 
 }

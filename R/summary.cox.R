@@ -1,6 +1,6 @@
-#' summary of parameter estimates of a Cox model
+#' Summary of parameter estimates of a Cox model
 #'
-#' @description This function returns the fitting result of the \code{CoxMM} function
+#' @description This function returns the result of the \code{CoxMM} function
 #'
 #'
 #' @aliases summary.Cox
@@ -9,23 +9,24 @@
 #' @param digits The desired number of digits after the decimal point. Default of 4 digits is used.
 #' @param ... Additional arguments
 #'
-#' @return Prints the fitting result of the \code{CoxMM} function.
+#' @return Summary for \code{CoxMM} objects.
 #' @seealso \code{\link{CoxMM}}
 #' @keywords methods
-##' @export
-##'
+#' @method summary Cox
+#' @export
+#'
 #' @examples
 #'
 #' library(survival)
 #' result <- CoxMM(Surv(time, status) ~ age + sex, lung)
-#' \dontrun{
-#' summary.Cox(result,digits=4)
-#' }
+#'
+#' summary(result,digits=4)
 #'
 #'
-summary.Cox <- function(object, digits=4, ...){
+#'
+summary.Cox <- function(object, digits = 4, ...) {
   cat("Call:\n")
-  cat(paste0(deparse(object$call), sep = "\n", collapse = "\n" ))
+  cat(paste0(deparse(object$call), sep = "\n", collapse = "\n"))
   cat("\n")
   cat("Model: ")
   cat("Cox Model")
@@ -41,8 +42,9 @@ summary.Cox <- function(object, digits=4, ...){
   loglik <- round(object$loglik, digits)
   cat("\n")
 
-  m = length(object$be)
-  be <- c(round(object$be, digits), round(object$std_be, digits), round(object$ci_be_lower, digits), round(object$ci_be_upper, digits))
+  m <- length(object$be)
+  be <- c(round(object$be, digits), round(object$std_be, digits), round(object$ci_be_lower,
+                                                                        digits), round(object$ci_be_upper, digits))
   be <- matrix(be, m, 4)
   rownames(be) <- object$namesX
 

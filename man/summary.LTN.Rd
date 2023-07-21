@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.LTN.R
 \name{summary.LTN}
 \alias{summary.LTN}
-\title{summary of parameter estimates of a LTN model}
+\title{Summary of parameter estimates of a LTN model}
 \usage{
 \method{summary}{LTN}(object, digits = 4, ...)
 }
@@ -14,19 +14,19 @@
 \item{...}{Additional arguments}
 }
 \value{
-Prints the fitting result of the \code{LTNMM} function.
+Summary for \code{LTNMM} objects.
 }
 \description{
-This function returns the fitting result of the \code{LTNMM} function
+This function returns the result of the \code{LTNMM} function
 }
 \examples{
 
 
 y=c(8.7, 5.4, 8.9, 5.8, 6.2, 9.9, 7.5, 9.5, 6.5, 6.3); a=5
 result <- LTNMM(y~1, a=5)
-\dontrun{
-summary.LTN(result,digits=4)
-}
+
+summary(result,digits=4)
+
 
 
 }

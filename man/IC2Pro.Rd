@@ -2,7 +2,7 @@
 % Please edit documentation in R/IC2Pro.R
 \name{IC2Pro}
 \alias{IC2Pro}
-\title{calculate non-parametric estimate for Case II interval censored survival function}
+\title{Calculate non-parametric estimate for case II interval censored survival function}
 \usage{
 IC2Pro(L, R, control = IC2Control(), ...)
 }
@@ -17,11 +17,11 @@ IC2Pro(L, R, control = IC2Control(), ...)
 }
 \value{
 An object of class \code{IC2Pro} that contains the following fields: \code{error}: convergence result; \code{strata}: dimensions of \code{df_tab};
-\code{s}: unique ordered elements of \eqn{ 0, L_{i}, R_{i}, Inf}; \code{S}: the survival function;
+\code{s}: unique ordered elements of \eqn{ {0, L_{i}, R_{i}, Inf} }; \code{S}: the survival function;
 \code{df_tab}: the data frame of survival intervals and survival probabilities for each interval.
 }
 \description{
-calculate non-parametric estimate for Case II interval censored survival function
+Calculate non-parametric estimate for case II interval censored survival function
 }
 \examples{
 L <- c(1.4, 1.5, 1.3, 0.9, 0.4, 0.2, 0.5, 0.03, 1.7, 0.2)
@@ -30,7 +30,7 @@ IC2Pro(L, R, control=IC2Control())
 
 }
 \references{
-Tian G.L., Huang X.F. and Xu, J.(2019). "An assembly and decomposition approach for constructing separable minorizing functions in a class of MM algorithms." \emph{Statistica Sinica} \strong{29}(2), 961-982.
+Tian G.L., Huang X.F. and Xu, J.(2019). 'An assembly and decomposition approach for constructing separable minorizing functions in a class of MM algorithms.' \emph{Statistica Sinica} \strong{29}(2), 961-982.
 }
 \seealso{
 \code{\link{IC2Control}}

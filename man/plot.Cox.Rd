@@ -6,12 +6,12 @@
 \usage{
 \method{plot}{Cox}(
   x,
-  XLAB = "Time",
-  YLAB = "Cumulative hazard",
-  TYPE = "s",
-  LTY = 1,
-  LWD = 1,
-  COL = gray(0),
+  xlab = "Time",
+  ylab = "Cumulative hazard",
+  type = "s",
+  lty = 1,
+  lwd = 1,
+  col = gray(0),
   digits = 4,
   ...
 )
@@ -19,24 +19,24 @@
 \arguments{
 \item{x}{The Cox object, see \code{\link{CoxMM}}.}
 
-\item{XLAB}{x label, default is "Time".}
+\item{xlab}{x label, default is 'Time'.}
 
-\item{YLAB}{y label, default is "Cumulative hazard".}
+\item{ylab}{y label, default is 'Cumulative hazard'.}
 
-\item{TYPE}{type value, default is "s".}
+\item{type}{type value, default is 's'.}
 
-\item{LTY}{lty value for line, default is 1.}
+\item{lty}{lty value for line, default is 1.}
 
-\item{LWD}{line width, default is 1.}
+\item{lwd}{line width, default is 1.}
 
-\item{COL}{color parameter, default is gray(0).}
+\item{col}{color parameter, default is gray(0).}
 
 \item{digits}{The digits after the decimal point, default = 4.}
 
 \item{...}{Additional arguments}
 }
 \value{
-the dataframe of "Time" and accumulative hazard \eqn{\Lambda}.
+the dataframe of 'Time' and accumulative hazard \eqn{\Lambda}.
 }
 \description{
 Plot the Cox object
@@ -44,8 +44,8 @@ Plot the Cox object
 \examples{
 library(survival)
 result <- CoxMM(Surv(time, status) ~ age + sex, lung)
-\dontrun{
-plot.Cox(result)
-}
+
+plot(result)
+
 
 }

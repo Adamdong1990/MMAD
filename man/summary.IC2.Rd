@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.IC2.R
 \name{summary.IC2}
 \alias{summary.IC2}
-\title{summary of parameter estimates of a IC2 model}
+\title{Summary of parameter estimates of a IC2 model}
 \usage{
 \method{summary}{IC2}(object, ...)
 }
@@ -12,19 +12,19 @@
 \item{...}{Additional arguments}
 }
 \value{
-Prints the fitting result of the \code{IC2MM} function.
+Summary for \code{IC2MM} objects.
 }
 \description{
-This function returns the fitting result of the \code{IC2MM} function
+This function returns the result of the \code{IC2MM} function
 }
 \examples{
 
 
 library(survival)
-result <- IC2MM(Surv(left, right, type = "interval2") ~ treatment, bcos)
-\dontrun{
-summary.IC2(result)
-}
+result <- IC2MM(Surv(left, right, type = 'interval2') ~ treatment, bcos)
+
+summary(result)
+
 
 
 }

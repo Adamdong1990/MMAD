@@ -6,43 +6,43 @@
 \usage{
 \method{plot}{IC2}(
   x,
-  XLAB = "Time",
-  YLAB = "Survival",
-  LEGEND = NULL,
-  MAIN = "Survival Function",
-  LTY = 1:9,
-  LWD = 1,
-  XLEG = 0,
-  YLEG = 0.15,
-  COL = gray(0),
+  xlab = "Time",
+  ylab = "Survival",
+  legend = NULL,
+  main = "Survival Function",
+  lty = 1:9,
+  lwd = 1,
+  xleg = 0,
+  yleg = 0.15,
+  col = gray(0),
   ...
 )
 }
 \arguments{
 \item{x}{The IC2 object, see \code{\link{IC2MM}}.}
 
-\item{XLAB}{x label, default is "Time".}
+\item{xlab}{x label, default is 'Time'.}
 
-\item{YLAB}{y label, default is "Survival".}
+\item{ylab}{y label, default is 'Survival'.}
 
-\item{LEGEND}{legend, default=NULL.}
+\item{legend}{legend, default=NULL.}
 
-\item{MAIN}{figure title, default is "Survival Function"}
+\item{main}{figure title, default is 'Survival Function'}
 
-\item{LTY}{lty value for line, default is 1:9.}
+\item{lty}{lty value for line, default is 1:9.}
 
-\item{LWD}{line width, default is 1.}
+\item{lwd}{line width, default is 1.}
 
-\item{XLEG}{positional parameters of the legend, default=0.}
+\item{xleg}{positional parameters of the legend, default=0.}
 
-\item{YLEG}{positional parameters of the legend, default=0.15 .}
+\item{yleg}{positional parameters of the legend, default=0.15 .}
 
-\item{COL}{the color of the drawing, default=gray(0)}
+\item{col}{the color of the drawing, default=gray(0)}
 
 \item{...}{Additional arguments}
 }
 \value{
-the Survival Function plot
+A list of arguments for the legend. Values are x, y, legend, fill, lty, bty, col.
 }
 \description{
 Plot the IC2 object
@@ -50,10 +50,9 @@ Plot the IC2 object
 \examples{
 
 library(survival)
-result = IC2MM(Surv(left, right, type = "interval2") ~ treatment, bcos)
-\dontrun{
-summary.IC2(result)
-plot.IC2(result, COL=c("red", "blue"))
-}
+result = IC2MM(Surv(left, right, type = 'interval2') ~ treatment, bcos)
+
+plot(result, col=c('red', 'blue'))
+
 
 }

@@ -1,11 +1,11 @@
 Package: MMAD
 Type: Package
-Title: MM algorithm based on the Assembly-Decomposition technology
-Version: 0.1.0
+Title: MM Algorithm Based on the Assembly-Decomposition Technology
+Version: 1.0.0
 Authors@R: c(person(given = "Xifen",
                     family = "Huang",
                     role = c("aut"),
-					   email = "xf_yellow@126.com"),
+                    email = "xf_yellow@126.com"),
              person(given = "Dengge",
                     family = "Liu",
                     role = c("aut", "cre"),
@@ -14,7 +14,7 @@ Authors@R: c(person(given = "Xifen",
                     family = "Zhou",
                     role = c("ctb")))
 Maintainer: Dengge Liu <dongge_adam@126.com>
-Description: The MM algorithm based on AD technology can be used for model estimation of parametric models, semi-parametric models and non-parametric models. We selected parametric models include left truncated normal distribution, type I multivariate zero-inflated generalized Poisson distribution and multivariate compound zero-inflated generalized Poisson distribution; Semiparametric models include Cox model and Gamma Frailty model; nonparametric model is estimate for Type II interval-censored data. These general methods are proposed based on the following papers,
+Description: The Minorize-Maximization(MM) algorithm based on Assembly-Decomposition(AD) technology can be used for model estimation of parametric models, semi-parametric models and non-parametric models. We selected parametric models including left truncated normal distribution, type I multivariate zero-inflated generalized poisson distribution and multivariate compound zero-inflated generalized poisson distribution; semiparametric models include Cox model and gamma frailty model; nonparametric model is estimated for type II interval-censored data. These general methods are proposed based on the following papers,
     Tian, Huang and Xu (2019) <doi:10.5705/SS.202016.0488>,
     Huang, Xu and Tian (2019) <doi:10.5705/ss.202016.0516>,
     Zhang and Huang (2022) <doi:10.1117/12.2642737>.
@@ -25,4 +25,4 @@ RoxygenNote: 7.2.3
 Imports:
   stats, grDevices, survival
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)

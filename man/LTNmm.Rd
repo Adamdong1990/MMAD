@@ -2,7 +2,7 @@
 % Please edit documentation in R/LTNMM.R
 \name{LTNMM}
 \alias{LTNMM}
-\title{MM algorithm based on the AD method for Left-truncated normal distribution}
+\title{MM algorithm based on the AD method for left-truncated normal distribution}
 \usage{
 LTNMM(
   formula,
@@ -20,13 +20,13 @@ LTNMM(
 
 \item{a}{A numeric scalar of the known left truncation value.}
 
-\item{mu}{Mean of the normal distribution, default is NULL, if truncated only we use estimates from OLS.}
+\item{mu}{The mean of the normal distribution is set to NULL by default. If the distribution is truncated, we use estimates from OLS.}
 
-\item{sigma}{Variance of the normal distribution, default is NULL, if truncated only we use estimates from OLS.}
+\item{sigma}{The variance of the normal distribution is set to NULL by default. If the distribution is truncated, we use estimates from OLS.}
 
 \item{data}{List that contains corresponding covariates. If none is provided then assumes objects are in user’s environment.}
 
-\item{Maxiter}{The maximum number of iterations; default=2000.}
+\item{Maxiter}{The maximum number of iterations is specified by default as 2000.}
 
 \item{convergence}{Specify the convergence criterion, the default is 1e-6.}
 
@@ -34,9 +34,9 @@ LTNMM(
 }
 \value{
 An object of class \code{LTNMM} that contains the following fields: total amount of observations,
-the number of iterations, convergence rate, the Log Likelihood value, estimated results for the unknown parameters,
+the number of iterations, convergence rate, the log likelihood value, estimated results for the unknown parameters,
 the standard deviation of estimate for the unknown parameters, the likelihood-based 95\% confidence interval for the unknown parameters,
-Information Criterion: AIC value and BIC value.
+information criterion: AIC value and BIC value.
 }
 \description{
 The \code{LTNMM} function is used to calculate a left-truncated normal distribution model. A \eqn{ LTN(\mu, \sigma^2; a) } has the density function
@@ -46,9 +46,9 @@ The \code{LTNMM} function is used to calculate a left-truncated normal distribut
 where \eqn{(\mu, \sigma^2)} are two unknown parameters, \eqn{ a } is a known constant, \eqn{ c = 1- \Phi(\frac{a-u}{ \sigma}) }, and  \eqn{ \Phi(\centerdot) } is the cdf of the standard normal distribution.
 }
 \details{
-The \code{LTNMM} function is used to fit Left-truncated normal distribution model using MM algorithms
-based on AD technology. \code{formula} can be used to provide data that needs to be fitted, such as \code{formula=y~1}.
-\code{data} is provided by user’s environment by default. The initial value of mean and variance of the normal distribution estimated form OLS.
+The \code{LTNMM} function is used to calculate a left-truncated normal distribution model using MM algorithms based on AD technology.
+The \code{formula} parameter can be used to provide the data that needs to be calculated, such as \code{formula=y~1}. By default, the
+\code{data} is provided by the user’s environment. The initial values of the mean and variance of the normal distribution are estimated using OLS.
 }
 \examples{
 y=c(8.7, 5.4, 8.9, 5.8, 6.2, 9.9, 7.5, 9.5, 6.5, 6.3); a=5
@@ -56,5 +56,5 @@ LTNMM(y~1, a=5)
 
 }
 \references{
-Tian G.L., Huang X.F., and Xu, J.(2019). "An assembly and decomposition approach for constructing separable minorizing functions in a class of MM algorithms." \emph{Statistica Sinica} \strong{29}(2), 961-982.
+Tian G.L., Huang X.F., and Xu, J.(2019). 'An assembly and decomposition approach for constructing separable minorizing functions in a class of MM algorithms.' \emph{Statistica Sinica} \strong{29}(2), 961-982.
 }

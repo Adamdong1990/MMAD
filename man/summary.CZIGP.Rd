@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.CZIGP.R
 \name{summary.CZIGP}
 \alias{summary.CZIGP}
-\title{summary of parameter estimates of a Multivariate Compound ZIGP model}
+\title{Summary of parameter estimates of a multivariate compound ZIGP model}
 \usage{
 \method{summary}{CZIGP}(object, digits = 4, ...)
 }
@@ -14,10 +14,10 @@
 \item{...}{Additional arguments}
 }
 \value{
-Prints the fitting result of the \code{CZIGPMM} function.
+Summary for \code{CZIGPMM} objects.
 }
 \description{
-This function returns the fitting result of the \code{CZIGPMM} function
+This function returns the result of the \code{CZIGPMM} function
 }
 \examples{
 
@@ -27,9 +27,9 @@ x2 <- c(38,15,0,25,34,0,0,0,0,0)
 y <- cbind(x1, x2)
 phi0 = 0.5; phi = rep(0.5,2); la = rep(1,2); th = rep(0.1,2)
 result <- CZIGPMM(y, phi0, phi, la, th)
-\dontrun{
-summary.CZIGP(result,digits=4)
-}
+
+summary(result,digits=4)
+
 }
 \seealso{
 \code{\link{CZIGPMM}}

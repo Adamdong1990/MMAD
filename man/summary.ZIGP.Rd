@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.ZIGP.R
 \name{summary.ZIGP}
 \alias{summary.ZIGP}
-\title{summary of parameter estimates of a Type I multivariate ZIGP model}
+\title{Summary of parameter estimates of a Type I multivariate ZIGP model}
 \usage{
 \method{summary}{ZIGP}(object, digits = 4, ...)
 }
@@ -14,10 +14,10 @@
 \item{...}{Additional arguments}
 }
 \value{
-Prints the fitting result of the \code{ZIGPMM} function.
+Summary for \code{ZIGPMM} objects.
 }
 \description{
-This function returns the fitting result of the \code{ZIGPMM} function
+This function returns the result of the \code{ZIGPMM} function
 }
 \examples{
 
@@ -27,9 +27,9 @@ x2 <- c(0, 0, 0,23, 0,51,24, 0,10, 0)
 y <- cbind(x1, x2)
 phi0 = 0.5; la = rep(1,2); th = rep(0.1,2)
 result <- ZIGPMM(y, phi0, la, th)
-\dontrun{
-summary.ZIGP(result,digits=4)
-}
+
+summary(result,digits=4)
+
 
 
 }

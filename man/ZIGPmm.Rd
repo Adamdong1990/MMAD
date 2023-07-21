@@ -2,7 +2,7 @@
 % Please edit documentation in R/ZIGPMM.R
 \name{ZIGPMM}
 \alias{ZIGPMM}
-\title{MM algorithm based on the AD method for Type I multivariate zero-inflated generalized Poisson distribution}
+\title{MM algorithm based on the AD method for type I multivariate zero-inflated generalized poisson distribution}
 \usage{
 ZIGPMM(data, phi0, la, th, Maxiter = 2000, convergence = 1e-06, ...)
 }
@@ -15,7 +15,7 @@ ZIGPMM(data, phi0, la, th, Maxiter = 2000, convergence = 1e-06, ...)
 
 \item{th}{The discrete parameter for Generalized Poisson distribution model.}
 
-\item{Maxiter}{The maximum number of iterations; default=2000.}
+\item{Maxiter}{The maximum number of iterations is specified by default as 2000.}
 
 \item{convergence}{Specify the convergence criterion, the default is 1e-6.}
 
@@ -23,9 +23,9 @@ ZIGPMM(data, phi0, la, th, Maxiter = 2000, convergence = 1e-06, ...)
 }
 \value{
 An object of class \code{ZIGPMM} that contains the following fields: total amount of observations,
-the number of iterations, convergence rate, the Log Likelihood value, estimated results for the unknown parameters,
+the number of iterations, convergence rate, the log likelihood value, estimated results for the unknown parameters,
 the standard deviation of estimate for the unknown parameters, the likelihood-based 95\% confidence interval for the unknown parameters,
-Information Criterion: AIC value and BIC value.
+information criterion: AIC value and BIC value.
 }
 \description{
 Let \eqn{Z \sim Bernoulli(1- \phi)},
@@ -42,7 +42,7 @@ The \code{ZIGPMM} function is used to calculate the Type I multivariate ZIGP mod
 }
 \details{
 The \code{ZIGPMM} function is used to calculate Type I multivariate zero-inflated generalized Poisson distribution model using MM algorithms
-based on AD technology. \code{data} is provided by user’s environment by default. In addition, the unknown parameters require users to give appropriate initial values,
+based on AD technology. \code{data} is provided by user by default, it can be a data frame or a matrix. In addition, the unknown parameters require users to give appropriate initial values,
 where \code{0<=phi0<1}, each \code{th} should satisfy \code{0<=th<1}, and each \code{la} should be greater than 0.
 }
 \examples{
@@ -54,7 +54,7 @@ ZIGPMM(y, phi0, la, th)
 
 }
 \references{
-Tian G.L., Huang X.F. and Xu, J.(2019). "An assembly and decomposition approach for constructing separable minorizing functions in a class of MM algorithms." \emph{Statistica Sinica} \strong{29}(2), 961-982.
+Tian G.L., Huang X.F. and Xu, J.(2019). 'An assembly and decomposition approach for constructing separable minorizing functions in a class of MM algorithms.' \emph{Statistica Sinica} \strong{29}(2), 961-982.
 
-Huang X.F., Tian G.L., Zhang, C. and Jiang, X.(2017). "Type I multivariate zero-inflated generalized Poisson distribution with applications." \emph{Statistics and its Interface} \strong{10}(2), 291-311.
+Huang X.F., Tian G.L., Zhang, C. and Jiang, X.(2017). 'Type I multivariate zero-inflated generalized Poisson distribution with applications.' \emph{Statistics and its Interface} \strong{10}(2), 291-311.
 }
