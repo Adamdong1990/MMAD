@@ -27,7 +27,7 @@ plot.GaF <- function(x, xlab = "Time", ylab = "Cumulative hazard", type = "s",
   tab <- data.frame(Time = round(time, digits), Lambda = round(LA, digits))
   tab <- unique(tab)
   rownames(tab) <- 1:nrow(tab)
-  print(tab)
+  # print(tab)
 
   # Add a figure frame The meaning of type='n' is not to add any
   # elements to the graph, but only to draw the coordinate axis
